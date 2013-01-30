@@ -16,7 +16,7 @@ MONTHLY_PAYMENT = .05
 def clrScr(osName):
 	if osName == 'posix':
 		os.system('clear')
-	elif osName == 'dos' or 'nt':
+	elif osName == 'dos' or osName == 'nt':
 		os.system('cls')
 
 while True:

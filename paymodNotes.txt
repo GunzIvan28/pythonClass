@@ -1,0 +1,42 @@
+"""
+Month | Current Total | Interest Amount | Principal | Payment | Balance Remaining 
+
+In order of instantiation:
+Rates:
+	Attributes:
+		Down Payment Rate:
+			rate.downPayRate = .10
+		Monthly Interest Rate:
+			rate.monIntRate = .01
+		Monthly Payment Rate:  	
+			rate.monPayRate = .05
+
+Item:
+	Attributes:
+		Base Price:
+			item.basePrice = (Input)
+		Down Payment:	
+			item.downPay = self.basePrice * rate.downPayRate
+		Starting Price:	
+			item.startPrice = self.basePrice - self.downPayment
+
+Account:
+	Attributes:
+		Interest Amount:
+			acc.intAmount = item.basePrice * rate.monIntRate
+		Principal:
+			acc.principal = item.startPrice * rate.monPayRate
+		Monthly Payment:
+			acc.monPay = self.principal + self.intAmount
+		Remaining Balance:
+			acc.balRemain = item.startingPrice - self.payment
+
+Monthly static:
+	acc.intAmount
+	acc.principal
+	acc.payment
+
+Monthly vary:
+	acc.balRemain
+
+"""
