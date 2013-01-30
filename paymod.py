@@ -3,8 +3,7 @@ Month | Current Total | Interest Amount | Principal | Payment | Balance Remainin
 
 Item:
 	Base Price:		(Input)
-	Down Payment:	Base Price * account.downPayRate
-	Starting Price:	Base Price - Down Payment
+	Down Payment:	self.basePrice * account.downPayRate
 
 Account:
 	Rates: (Static)
@@ -12,6 +11,10 @@ Account:
 		Monthly Interest Rate:  .01
 		Monthly Payment Rate:  	.05
 	Info: (Dynamic)
+		Starting Price:		item.basePrice - item.downPayment
+		Interest Amount:	item.basePrice * self.monIntRate
+		Principal:			item.startPrice * 
+
 
 
 
