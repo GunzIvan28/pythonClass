@@ -4,7 +4,7 @@ Payment Info Class for the Tidbit Pay Program
 """
  Month | Current Total | Interest Owed | Principal | Payment | Balance Remaining 
 
-Balance Remaining = 
+Balance Remaining = test
 """
 class Item(object):
 	"""Item information"""
