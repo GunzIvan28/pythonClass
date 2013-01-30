@@ -1,32 +1,3 @@
-"""
-Month | Current Total | Interest Amount | Principal | Payment | Balance Remaining 
-
-Item:
-	Base Price:		(Input)
-	Down Payment:	self.basePrice * account.downPayRate
-
-Account:
-	Rates: (Static)
-		Down Payment Rate:		.10
-		Monthly Interest Rate:  .01
-		Monthly Payment Rate:  	.05
-	Info: (Dynamic)
-		Starting Price:		item.basePrice - item.downPayment
-		Interest Amount:	item.basePrice * self.monIntRate
-		Principal:			item.startPrice * 
-
-
-
-
-Down Payment = Price * .10
-Starting Price = Price - Down Payment
-Current Total = Starting price - Payment
-Interest Amount = Starting price * .01
-Payment = Principal + Interest Amount
-Balance Remaining = Current total - Payment
-Principal = Starting price * .05
-
-"""
 class Item(object):
 	"""Item information"""
 	
