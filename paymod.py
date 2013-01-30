@@ -5,9 +5,6 @@ Item:
 	Base Price:		(Input)
 	Down Payment:	Base Price * account.downPayRate
 	Starting Price:	Base Price - Down Payment
-	test
-	test
-
 
 Account:
 	Rates: (Static)
