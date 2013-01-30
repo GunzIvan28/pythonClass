@@ -1,11 +1,28 @@
 """
-Payment Info Class for the Tidbit Pay Program
-"""
-"""
- Month | Current Total | Interest Owed | Principal | Payment | Balance Remaining 
+Month | Current Total | Interest Amount | Principal | Payment | Balance Remaining 
 
-Balance Remaining = test
-Testing again.
+Item:
+	Base Price:		(Input)
+	Starting Price:	Base Price - account.downPayRate
+	
+
+Account:
+	Rates: (Static)
+		Down Payment Rate:		.10
+		Monthly Interest Rate:  .01
+		Monthly Payment Rate:  	.05
+	Info: (Dynamic)
+
+
+
+Down Payment = Price * .10
+Starting Price = Price - Down Payment
+Current Total = Starting price - Payment
+Interest Amount = Starting price * .01
+Payment = Principal + Interest Amount
+Balance Remaining = Current total - Payment
+Principal = Starting price * .05
+
 """
 class Item(object):
 	"""Item information"""
