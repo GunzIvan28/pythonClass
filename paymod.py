@@ -3,8 +3,9 @@ Month | Current Total | Interest Amount | Principal | Payment | Balance Remainin
 
 Item:
 	Base Price:		(Input)
-	Starting Price:	Base Price - account.downPayRate
-	
+	Down Payment:	Base Price * account.downPayRate
+	Starting Price:	Base Price - Down Payment
+
 
 Account:
 	Rates: (Static)
