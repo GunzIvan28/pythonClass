@@ -1,0 +1,56 @@
+Month | Current Total | Interest Amount | Principal | Payment | Balance Remaining 
+
+Month 			=	Generated from loop in main.
+Current Total 	= 	
+Total Payment 	=	acc.monPay * loopValue (aka i in for loop)
+
+Balance remaining = Calculate total payment by multiplying it against [0-12],
+					subtract that from starting price in each iteration.
+
+for i in xrange(0, 12):
+	print i, acc.currentTotal, acc.intAmount, acc.principal, acc.monPay, acc.currentTotal - (acc.payment * i)
+
+In order of instantiation:
+Rates:
+	Attributes:
+		Down Payment Rate:
+			rate.downPayRate = .10
+		Monthly Interest Rate:
+			rate.monIntRate = .01
+		Monthly Payment Rate:  	
+			rate.monPayRate = .05
+
+Item:
+	Attributes:
+		Base Price:
+			item.basePrice = (Input)
+		Down Payment:	
+			item.downPay = self.basePrice * rate.downPayRate
+		Starting Price:
+			item.startPrice = item.basePrice - item.downPay
+
+Account:
+	Attributes:
+		Current Total:
+			acc.currentTotal = acc.currentTotal - self.payment
+		Interest Amount:
+			acc.intAmount = item.basePrice * rate.monIntRate
+		Principal:
+			acc.principal = item.startPrice * rate.monPayRate
+		Monthly Payment:
+			acc.payment = self.principal + self.intAmount
+		Remaining Balance:
+			acc.balRemain
+
+Monthly static:
+	acc.intAmount
+	acc.principal
+	acc.payment
+
+Monthly vary:
+	acc.currentTotal
+	acc.balRemain
+
+Program takes PRICE.
+	Item (method) sets BASEPRICE, calculates and sets DOWNPAYMENT, and returns the STARTPRICE.
+		Account (method) takes STARTPRICE and sets CURRENTTOTAL, calculates
