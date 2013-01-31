@@ -2,7 +2,7 @@
 
 """
 Program: TidBit Computer Store's Payment Schedule
-Author: Bill Minear
+Author: 
 
 Purpose:
 """
