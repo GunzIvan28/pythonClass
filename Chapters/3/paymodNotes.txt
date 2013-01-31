@@ -25,20 +25,20 @@ Item:
 		Base Price:
 			item.basePrice = (Input)
 		Down Payment:	
-			item.downPay = self.basePrice * rate.downPayRate
+			item.downPay = item.basePrice * rate.downPayRate
+		Interest Amount:
+			item.intAmount = item.basePrice * rate.monIntRate
 		Starting Price:
 			item.startPrice = item.basePrice - item.downPay
+		Principal:
+			item.principal = item.startPrice * rate.monPayRate
+		Monthly Payment:
+			item.payment = item.principal + item.intAmount
 
 Account:
 	Attributes:
 		Current Total:
-			acc.currentTotal = acc.currentTotal - self.payment
-		Interest Amount:
-			acc.intAmount = item.basePrice * rate.monIntRate
-		Principal:
-			acc.principal = item.startPrice * rate.monPayRate
-		Monthly Payment:
-			acc.payment = self.principal + self.intAmount
+			acc.currentTotal = acc.currentTotal - item.payment
 		Remaining Balance:
 			acc.balRemain
 
@@ -51,6 +51,9 @@ Monthly vary:
 	acc.currentTotal
 	acc.balRemain
 
+Interest is before Down Payment.
+Monthly Payment is after down payment.
+
 Program takes PRICE.
-	Item (method) sets BASEPRICE, calculates and sets DOWNPAYMENT, and returns the STARTPRICE.
-		Account (method) takes STARTPRICE and sets CURRENTTOTAL, calculates
+	Item (method) sets BASEPRICE; calculates and sets DOWNPAYMENT, INTERESTAMOUNT, STARTPRICE, PRINCIPAL, and MONTHLYPAYMENT; and returns the STARTPRICE.
+		Account (method) accepts STARTPRICE and sets CURRENTTOTAL.	
