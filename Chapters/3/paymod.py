@@ -12,7 +12,7 @@ class Rates(object):
 		price,
 		price * self.downPay,
 		price * self.interest,
-		price * self.payment
+		(price - (price * self.downPay)) * self.payment
 		]
 		return self.calcs
 
@@ -49,4 +49,4 @@ class Account(object):
 		payTotal = [self.payment]
 		while payTotal[-1] < self.startPrice:
 			payTotal.append(payTotal[-1] + self.payment)
-		return payTotal, len(payTotal)
+		return len(payTotal)
