@@ -20,7 +20,7 @@ Rates:
 		Monthly Payment Rate:  	
 			rate.monPayRate = .05
 
-Item:
+Account:
 	Attributes:
 		Base Price:
 			item.basePrice = (Input)
@@ -34,9 +34,6 @@ Item:
 			item.principal = item.startPrice * rate.monPayRate
 		Monthly Payment:
 			item.payment = item.principal + item.intAmount
-
-Account:
-	Attributes:
 		Current Total:
 			acc.currentTotal = acc.currentTotal - item.payment
 		Remaining Balance:

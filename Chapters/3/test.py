@@ -1,21 +1,32 @@
-from paymod import Rates, Item, Account
+from paymod import Rates, Account
 
 rate = Rates()
-
-while True:
-	try:
-		price = input("Enter the item's value: ")
-		break
-	except (NameError, SyntaxError):
-		print 'Value not numeric. Press ENTER and try again.'
-
-item = Item(price, rate.downPay, rate.interest, rate.payment)
-acc = Account(item.startPrice, item.payment)
-print item
+acc = Account(rate.itemCalcs(2000.00))
 print acc
+print acc.loanLength()
 
-for i in xrange(0, 12):
-	if i == 0:
-		print item.startPrice
-	else:
-		print acc.totalBalance - (item.payment * i)
+# while True:
+# 	try:
+# 		price = input("Enter the item's value: ")
+# 		break
+# 	except (NameError, SyntaxError):
+# 		print 'Value not numeric. Press ENTER and try again.'
+
+
+# for i in xrange(0, 12):
+# 	if i == 0:
+# 		print item.startPrice
+# 	else:
+		# print acc.totalBalance - (item.payment * i)
+
+# test = [1, 2, 3]
+# acc.test(test)
+
+# payTotal = [acc.payment]
+# while payTotal[-1] < acc.startPrice:
+# 	payTotal.append(payTotal[-1] + acc.payment)
+# 	print len(payTotal)
+	# print payTotal
+
+# lastPay = acc.startPrice - payTotal
+# print lastPay

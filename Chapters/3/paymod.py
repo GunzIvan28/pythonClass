@@ -44,4 +44,9 @@ class Account(object):
 	def setBalance(self, price, payment):
 		self.totalBalance = price - payment
 		self.balRemaining = None
-
+ 	
+ 	def loanLength(self):
+		payTotal = [self.payment]
+		while payTotal[-1] < self.startPrice:
+			payTotal.append(payTotal[-1] + self.payment)
+		return payTotal, len(payTotal)
