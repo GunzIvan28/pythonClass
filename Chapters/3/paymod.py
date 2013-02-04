@@ -6,19 +6,25 @@ class Rates(object):
 		self.interest = .01
 		self.payment = .05
 
-class Item(object):
-	"""Item information"""
-	
+	def itemCalcs(self, price):
+		"""Calculates rates for an item"""
+		self.calcs = [
+		price,
+		price * self.downPay,
+		price * self.interest,
+		price * self.payment
+		]
+		return self.calcs
 
 class Account(object):
 	"""Account information"""
 
-	def __init__(self, price, downRate, intRate, payRate):
-		self.basePrice = price
-		self.downPay = price * downRate
-		self.interest = price * intRate
+	def __init__(self, rateList):
+		self.basePrice = rateList[0] 
+		self.downPay = rateList[1]
+		self.interest = rateList[2]
 		self.startPrice = self.basePrice - self.downPay
-		self.principal = price * payRate
+		self.principal = rateList[3]
 		self.payment = self.principal + self.interest
 		self.totalBalance = None
 		self.balRemaining = None
@@ -38,3 +44,4 @@ class Account(object):
 	def setBalance(self, price, payment):
 		self.totalBalance = price - payment
 		self.balRemaining = None
+
