@@ -13,13 +13,13 @@ class Rates(object):
 class Account(object):
 	"""Account information"""
 
-	def __init__(self, price, rates):
-		self.basePrice = price
-		self.downPay = price * rates[0] 
-		self.interest = price * rates[1]
-		self.startPrice = self.basePrice - self.downPay
-		self.principal = self.startPrice * rates[2]
-		self.payment = self.principal + self.interest
+	def __init__(self):
+		self.basePrice = None
+		self.downPay = None
+		self.interest = None
+		self.startPrice = None
+		self.principal = None
+		self.payment = None
 
 	def __str__(self):
 		"""For debugging"""
@@ -30,6 +30,21 @@ class Account(object):
 		'\nPrincipal: ' + str(self.principal) + \
 		'\nPayment: ' + str(self.payment) + \
 		'\nTotal Balance: ' + str(self.totalBalance)
+
+	def accCheck(self):
+		if self.basePrice == None:
+			return 1
+		else:
+			return 0
+
+	def setPrice(self, price, rates):
+		"""Sets price and related payments"""
+		self.basePrice = price
+		self.downPay = price * rates[0] 
+		self.interest = price * rates[1]
+		self.startPrice = self.basePrice - self.downPay
+		self.principal = self.startPrice * rates[2]
+		self.payment = self.principal + self.interest
 
  	def loanLength(self):
 		payTotal = [self.payment]
