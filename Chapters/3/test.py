@@ -1,53 +1,63 @@
 from paymod import Rates, Account
+import os
 
-rate = Rates()
+osName = os.name
+rates = Rates()
+
+def clrScr(osName):
+	if osName == 'posix':
+		os.system('clear')
+	elif osName == 'dos' or osName == 'nt':
+		os.system('cls')
+
+def mainMenu():
+	while True:
+		clrScr(osName)
+		print 'What would you like to do?'
+		print '1.) Enter price'
+		print '2.) Print Account Table'
+		print '3.) Export to XML'
+		print '4.) Exit'
+		try:
+			menuAns = input('--> ')
+			if menuAns > 0 and menuAns <= 4:
+				return menuAns
+			else:
+				tryAgain = raw_input('Invalid input. Press ENTER to try again.')
+		except (NameError, SyntaxError):
+			tryAgain = raw_input('Invalid input. Press ENTER to try again.')
+
+def main(menuAns):
+	if menuAns == 1:
+		while True:
+			try:
+				price = input("Enter the item's value: ")
+				acc = Account(price, rates.listRates)
+			except (NameError, SyntaxError):
+				print 'Value not numeric. Press ENTER and try again.'
+
+	elif menuAns == 2:
+		print '%5s%14s%16s%10s%8s%18s' % \
+			('Month', 'Current Total', 'Interest Amount',
+			 'Principal', 'Payment', 'Balance Remaining')
+
+		print '%5s%14s%16s%10s%8s%18s' % \
+			('-' * 5, '-' * 13, '-' * 15, '-' * 9,
+			'-' * 7, '-' * 17)
+
+		for i in xrange(acc.loanLength()):
+			print '%5d%14.2f%16.2f%10.2f%8.2f%18.2f' % \
+				(i,
+				acc.startPrice - acc.payment * i,
+				acc.interest,
+				acc.principal,
+				acc.payment,
+				acc.startPrice - acc.payment * (i + 1))
+		carryOn = raw_input('Press ENTER to continue.')
+
 
 while True:
-	try:
-		price = input("Enter the item's value: ")
-		break
-	except (NameError, SyntaxError):
-		print 'Value not numeric. Press ENTER and try again.'
-
-acc = Account(rate.itemCalcs(price))
-# print acc
-# print acc.loanLength()
-
-# for i in xrange(0, 12):
-# 	if i == 0:
-# 		print item.startPrice
-# 	else:
-		# print acc.totalBalance - (item.payment * i)
-
-# test = [1, 2, 3]
-# acc.test(test)
-
-# payTotal = [acc.payment]
-# while payTotal[-1] < acc.startPrice:
-# 	payTotal.append(payTotal[-1] + acc.payment)
-# 	print len(payTotal)
-	# print payTotal
-
-# lastPay = acc.startPrice - payTotal
-# print lastPay
-
-print '%5s%14s%16s%10s%8s%18s' % \
-	('Month', 'Current Total', 'Interest Amount',
-	 'Principal', 'Payment', 'Balance Remaining')
-
-print '%5s%14s%16s%10s%8s%18s' % \
-	('-' * 5, '-' * 13, '-' * 15, '-' * 9,
-	'-' * 7, '-' * 17)
-
-for i in xrange(acc.loanLength()):
-	print '%5d%14.2f%16.2f%10.2f%8.2f%18.2f' % \
-		(i,
-		acc.startPrice - acc.payment,
-		acc.interest,
-		acc.principal,
-		acc.payment,
-		acc.startPrice - acc.payment * (i +1))
-
+	main(mainMenu)
 
 # current total = starting price - payment * i
 # remaining balance = starting price - payment * (i + 1)
