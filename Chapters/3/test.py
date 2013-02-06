@@ -18,9 +18,8 @@ def mainMenu():
 		clrScr(osName)
 		print 'What would you like to do?'
 		print '1.) Enter price'
-		print '2.) Print Account Table'
-		print '3.) Export to XML'
-		print '4.) Exit'
+		print '2.) Print table'
+		print '3.) Exit'
 		try:
 			menuAns = input('--> ')
 			if menuAns > 0 and menuAns <= 4:
@@ -36,41 +35,38 @@ def main(menuAns):
 		while True:
 			try:
 				price = input("Enter the item's value: ")
-				acc.setPrice(price, rates.listRates())
-				break
+				if price < 0:
+					print 'Price can not be less than zero.'
+					tryAgain = raw_input('Press ENTER to try again.')
+				else:
+					acc.setPrice(price, rates.rateCalc(price))
+					print 'Price set to $' + str(round(price, 2))
+					moveOn = raw_input('Press ENTER to continue.')
+					break
 			except (NameError, SyntaxError):
 				print 'Value not numeric. Press ENTER and try again.'
 
 	elif menuAns == 2:
-		accExist = acc.accCheck()
-		if accExist == 0:
+		if acc.accCheck() == 0:
 			clrScr(osName)
 			print '%5s%14s%16s%10s%8s%18s' % \
 				('Month', 'Current Total', 'Interest Amount',
 				 'Principal', 'Payment', 'Balance Remaining')
-
 			print '%5s%14s%16s%10s%8s%18s' % \
 				('-' * 5, '-' * 13, '-' * 15, '-' * 9,
 				'-' * 7, '-' * 17)
-
 			for i in xrange(acc.loanLength()):
-				print '%5d%14.2f%16.2f%10.2f%8.2f%18.2f' % \
-					(i,
-					acc.startPrice - acc.payment * i,
-					acc.interest,
-					acc.principal,
-					acc.payment,
-					acc.startPrice - acc.payment * (i + 1))
+				print acc.monthlyValues(i)
 			carryOn = raw_input('Press ENTER to continue.')
-		elif accExist == 1:
+		else:
 			print 'Account does not exist.'
 			carryOn = raw_input('Press ENTER to continue.')
 
-	elif menuAns == 4:
+	elif menuAns == 3:
 		exit()
 
-
 while True:
+	"""Main loop"""
 	main(mainMenu())
 
 # current total = starting price - payment * i
