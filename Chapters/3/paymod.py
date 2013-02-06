@@ -73,3 +73,5 @@ class Account(object):
 			self.principal,
 			self.payment,
 			balRemain)
+
+# Calculate interest based on current balance.
