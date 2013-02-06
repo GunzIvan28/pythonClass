@@ -5,13 +5,18 @@ DOWN_RATE = .10
 PAY_RATE = .05
 
 price = input('Enter a price: ')
-base = price - (price * DOWN_RATE)
-balanceRemaining = base 
-monthlyPrincipal = balanceRemaining * PAY_RATE
+downPayment = price * DOWN_RATE
+base = price - downPayment
+balanceRemaining = base
+monthlyPrincipal = base * PAY_RATE
 monthlyInterest = balanceRemaining * INT_RATE
 monthlyPayment = monthlyPrincipal + monthlyInterest
+i = 1
 
-while monthlyPayment == 0 or monthlyPayment > 0:
-	print 
-
+while balanceRemaining > 0.00:
+	print i, balanceRemaining, '\t', monthlyPrincipal, '\t', monthlyInterest,'\t', monthlyPayment
+	balanceRemaining = balanceRemaining - monthlyPayment
+	monthlyInterest = balanceRemaining * INT_RATE
+	monthlyPayment = monthlyPrincipal + monthlyInterest
+	i += 1
 
