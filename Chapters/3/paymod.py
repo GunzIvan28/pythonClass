@@ -41,8 +41,8 @@ class Account(object):
 		self.downPayment = price * rates[0]
 		self.base = price - self.downPayment
 		self.currentBalance = self.base
-		self.monthlyPrincipal = self.base * rates[1]
-		self.monthlyInterest = self.currentBalance * rates[2]
+		self.monthlyPrincipal = self.base * rates[2]
+		self.monthlyInterest = self.currentBalance * rates[1]
 		self.monthlyPayment = self.monthlyPrincipal + self.monthlyInterest
 
 #  	def loanLength(self):
