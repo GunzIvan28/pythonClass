@@ -1,10 +1,32 @@
 #!/usr/bin/python
+
+"""
+Program: Tid Bit Pay Plan Calculator 
+			-or- 'How I learned to hate accounting.'
+Author: Bill Minear
+
+Purpose:
+	Accepts an inventory item price as input and 
+	calculates loan amounts
+
+"""
+import os
 from paymod import Rates, Account
 
+osName = os.name
 rates = Rates()
 acc = Account()
 
+def clearScreen(osName):
+	"""Clears screen"""
+	if osName == 'posix':
+		os.system('clear')
+	elif osName == 'dos' or osName == 'nt':
+		os.system('cls')
+
 def mainMenu():
+	"""Action selection"""
+	clearScreen(osName)	
 	print 'What would you like to do?'
 	print '1). Enter price'
 	print '2). Print table'
@@ -22,43 +44,24 @@ def mainMenu():
 			tryAgain = raw_input('Press ENTER to continue.')
 
 def main(menuAns):
+	"""Utilization based on mainMenu() answer"""
 	if menuAns == 1:
-		while True:
-			try:
-				price = input('Enter a price: ')
-				if price < 0:
-					print 'Invalid input'
-					tryAgain = raw_input('Press ENTER to continue.')
-				else:
-					acc.setPrice(price, rates.listRates())
-					print 'Price is:', round(price, 2)
-					moveAlong = raw_input('Press ENTER to continue.')
-					break
-			except (NameError, SyntaxError):
-					print 'Invalid input.'
-					tryAgain = raw_input('Press ENTER to continue.')
+		try:
+			price = input('Enter a price: ')
+			if price < 0:
+				print '\nInvalid input.\n'
+				tryAgain = raw_input('Press ENTER to continue.')
+			else:
+				acc.setPrice(price, rates.listRates())
+				print '\nPrice is: $%.2f' % price
+				moveAlong = raw_input('\nPress ENTER to continue.')
+		except (NameError, SyntaxError):
+				print '\nInvalid input.\n'
+				tryAgain = raw_input('Press ENTER to continue.')
 
 	elif menuAns == 2:
-		i = 1
-		print '%5s%15s%17s%11s%9s%19s' % \
-			('Month', 'Current Total', 'Interest Amount',
-			 'Principal', 'Payment', 'Balance Remaining')
-		print '%5s%15s%17s%11s%9s%19s' % \
-			('-' * 5, '-' * 13, '-' * 15, '-' * 9,
-			'-' * 7, '-' * 17)
-
-		while acc.currentBalance > 0.00:
-			balanceRemaining = acc.currentBalance - acc.monthlyPayment
-			if balanceRemaining < 0:
-				balanceRemaining = 0
-				acc.monthlyPayment = acc.currentBalance
-			print '%5s%15.2f%17.2f%11.2f%9.2f%19.2f' % \
-			(i, acc.currentBalance, acc.monthlyInterest, acc.monthlyPrincipal,
-				acc.monthlyPayment, balanceRemaining)
-			acc.currentBalance = acc.currentBalance - acc.monthlyPayment
-			acc.monthlyInterest = balanceRemaining * rates.intRate
-			acc.monthlyPayment = acc.monthlyPrincipal + acc.monthlyInterest
-			i += 1
+		clearScreen(osName)
+		acc.printTable(rates.listRates())
 		moveAlong = raw_input('Press ENTER to continue.')
 
 	elif menuAns == 3:
