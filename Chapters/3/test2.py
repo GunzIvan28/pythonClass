@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 """
-Program: Tid Bit Pay Plan Calculator 
-			-or- 'How I learned to hate accounting.'
+Program: TidBit Pay Plan Calculator 
+		-or- 'How I learned to hate accounting.'
 Author: Bill Minear
 
 Purpose:
@@ -33,19 +33,19 @@ def mainMenu():
 	print '3). Exit'
 	while True:
 		try:
-			menuAns = input('--> ')
-			if menuAns < 1 and menuAns > 3:
+			menuAnswer = input('--> ')
+			if menuAnswer < 1 and menuAnswer > 3:
 				print 'Invalid input.'
 				tryAgain = raw_input('Press ENTER to continue.')
 			else:
-				return menuAns
+				return menuAnswer
 		except (NameError, SyntaxError):
 			print 'Invalid input.'
 			tryAgain = raw_input('Press ENTER to continue.')
 
-def main(menuAns):
-	"""Utilization based on mainMenu() answer"""
-	if menuAns == 1:
+def main(menuAnswer):
+	"""Utilization based on mainMenu return"""
+	if menuAnswer == 1:
 		try:
 			price = input('Enter a price: ')
 			if price < 0:
@@ -59,12 +59,17 @@ def main(menuAns):
 				print '\nInvalid input.\n'
 				tryAgain = raw_input('Press ENTER to continue.')
 
-	elif menuAns == 2:
-		clearScreen(osName)
-		acc.printTable(rates.listRates())
-		moveAlong = raw_input('Press ENTER to continue.')
+	elif menuAnswer == 2:
+		if acc.doesAccountExist() == 0:
+			print '\nNo price has been set.'
+			tryAgain = raw_input('\nPress ENTER to continue.')
+		else:
+			clearScreen(osName)
+			acc.setPrice(acc.price, rates.listRates())	# <- This is here because of my
+			print acc.currentBalance					# poorly designed data manipulation.
+			moveAlong = raw_input('Press ENTER to continue.')
 
-	elif menuAns == 3:
+	elif menuAnswer == 3:
 		exit()
 
 while True:
