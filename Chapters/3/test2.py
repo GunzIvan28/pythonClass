@@ -44,7 +44,7 @@ def mainMenu():
 			tryAgain = raw_input('Press ENTER to continue.')
 
 def main(menuAnswer):
-	"""Utilization based on mainMenu return"""
+	"""Utilization based on mainMenu return."""
 	if menuAnswer == 1:
 		try:
 			price = input('Enter a price: ')
@@ -65,12 +65,13 @@ def main(menuAnswer):
 			tryAgain = raw_input('\nPress ENTER to continue.')
 		else:
 			clearScreen(osName)
-			acc.setPrice(acc.price, rates.listRates())	# <- This is here because of my
-			print acc.currentBalance					# poorly designed data manipulation.
+			acc.setPrice(acc.price, rates.listRates())	# <- This is here because of poorly 
+			acc.printTable(rates.listRates())			# designed data manipulation.
 			moveAlong = raw_input('Press ENTER to continue.')
 
 	elif menuAnswer == 3:
 		exit()
 
+# Main loop.
 while True:
 	main(mainMenu())
