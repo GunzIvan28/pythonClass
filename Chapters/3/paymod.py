@@ -26,10 +26,11 @@ Classes:
 				to the loan.
 
 			doesAccountExist:
-				Ensures account information is populated.
+				Returns based on population of account info.
 
 			printTable:
 				Prints the account information in a fancy table.
+				Large values cause the formatting to be wonky.
 """
 
 class Rates(object):
@@ -68,16 +69,16 @@ class Account(object):
 		self.monthlyPayment = self.monthlyPrincipal + self.monthlyInterest
 
 	def doesAccountExist(self):
-		"""To ensure that the account attributes have been populated."""
+		"""To check if the account attributes have been populated."""
 		if self.price == None:
 			return 0
 		else:
 			return 1
 
 	def printTable(self, rates):
-		"""Cluster f*** central"""
+		"""Displays account information in a table."""
 		i = 1
-		print '\nItem Price: $%.2f | Down Payment: $%.2f' % (self.price, self.downPayment)
+		print 'Item Price: $%.2f | Down Payment: $%.2f' % (self.price, self.downPayment)
 		print '%5s%15s%17s%11s%9s%19s' % \
 			('-' * 5, '-' * 13, '-' * 15, '-' * 9, '-' * 7, '-' * 17)
 		print '%5s%15s%17s%11s%9s%19s' % \
