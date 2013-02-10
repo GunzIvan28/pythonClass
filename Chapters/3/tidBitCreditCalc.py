@@ -6,8 +6,9 @@ Program: TidBit Pay Plan Calculator
 Author: Bill Minear
 
 Purpose:
-	Accepts a dollar value as input and 
-	calculates loan amounts.
+	Accepts a dollar value as input, 
+	calculates loan amounts, and displays
+	them in table format.
 
 """
 import os
