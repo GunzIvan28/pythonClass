@@ -1,16 +1,21 @@
 #!/usr/bin/python
 
+from payroll import employee
+
+employee = employee()
+
 print '1.) Add employee'
 print '2.) Print employee info'
 answer = input('--> ')
 
 if answer == 1:
-	employeeName = raw_input('Employee Name: ')
-	hourlyWage = raw_input('Hourly Wage: ')
-	hoursWorked = raw_input('Hours Worked: ')
-	employeeInfo = []
-	fileLine = ' '.join(employeeName, hourlyWage, hoursWorked)
-	print fileLine
+	firstName = raw_input("Employee's first name: ")
+	lastName = raw_input("Employee's last name: ")
+	hourlyWage = raw_input('Hourly wage: ')
+	hoursWorked = raw_input('Hours worked: ')
+	employee.setEmployee(firstName, lastName, hourlyWage, hoursWorked)
+	print employee
+
 	# f = open('myfile.txt', 'r')
 	# for line in f:
 	# 	print line
