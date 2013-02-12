@@ -1,48 +1,44 @@
 #!/usr/bin/python
 
+from time import sleep
+from menu import clear
 from payroll import employee
-
 employee = employee()
 
-print '1.) Add employee'
-print '2.) Print employee info'
-answer = input('--> ')
+def mainMenu():
+	while True:
+		try:
+			clear()
+			print 'Welcome to the Payroll System.'
+			print 'What would you like to do?'
+			print '1.) View employee report'
+			print '2.) Add new employee'
+			print '3.) Update employee'
+			print '4.) Remove employee'
+			print '5.) Exit'
+			mainMenuAnswer = input('--> ')
+			if mainMenuAnswer <  1 or mainMenuAnswer > 5:
+				tryAgain = raw_input('Invalid selection. Press ENTER to try again.')
+			else:
+				return mainMenuAnswer
+		except (NameError, SyntaxError):
+			tryAgain = raw_input('Invalid selection. Press ENTER to try again.')
 
-if answer == 1:
-	firstName = raw_input("Employee's first name: ")
-	lastName = raw_input("Employee's last name: ")
-	hourlyWage = raw_input('Hourly wage: ')
-	hoursWorked = raw_input('Hours worked: ')
-	employee.setEmployee(firstName, lastName, hourlyWage, hoursWorked)
-	print employee
+def main(mainMenuAnswer):
+	# if mainMenuAnswer == 1:
 
-	# f = open('myfile.txt', 'r')
-	# for line in f:
-	# 	print line
-	# f.close)(
-# elif answer == 2:
-# 	input = raw_input('Write what:\n')
-# 	f = open('myfile.txt', 'a')
-# 	f.write(input)
-# 	f.close()
+	# if mainMenuAnswer == 2:
+
+	# if mainMenuAnswer == 3:
+
+	# if mainMenuAnswer == 4:
+
+	if mainMenuAnswer == 5:
+		clear()
+		print 'Thank you for using the Payroll System.'
+		sleep(2)
+		exit()
 
 
-# test = raw_input('Enter a string: ')
-# offSet = input('Enter an offset: ')
-# for thing in test:
-# 	ordValue = ord(thing)
-# 	cipherValue = ordValue + offSet 
-# 	# print 'Cipher Val: ' + str(cipherValue)
-# 	# print ord('z')
-# 	# print ord('a') + offSet
-# 	# print ord('z') - ordValue + 1
-# 	# print chr(ord('a') + offSet - \
-# 	# (ord('z') - ordValue + 1))
-# 	if cipherValue > ord('z'):
-# 		cipherValue = ord('a') + offSet - \
-# 					  (ord('z') - ordValue +1)
-# 	print cipherValue
-
-# ASCII 32 through 126
-# 	if Greater than 126 do:
-# 		fancy math that loops back around
+while True:
+	main(mainMenu())

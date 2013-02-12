@@ -22,17 +22,7 @@ class employee(object):
 		self.lastName = lastName
 		self.hourlyWage = hourlyWage
 		self.hoursWorked = hoursWorked
-
-"""
-Needed XML abilities:
-	+) Does file exist?
-		+) If no: 
-			+) Create file, add header and employee root.
-		+) If yes: 
-			+) Read in, set employee as root, and append
-				new employees, read employee info for output,
-				etc.
-"""
+		
 	def employeeToXML(self):
 		doc = minidom.Document()
 		root = doc.createElement('Employees')
@@ -46,3 +36,14 @@ Needed XML abilities:
 		f = open('test.xml', 'w')
 		root.writexml(f)
 		f.close()
+
+"""
+Needed XML abilities:
+	+) Does file exist?
+		+) If no: 
+			+) Create file, add header and employee root.
+		+) If yes: 
+			+) Read in, set employee as root, and append
+				new employees, read employee info for output,
+				etc.
+"""
