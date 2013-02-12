@@ -1,13 +1,7 @@
 from xml.dom import minidom
+from payroll import *
 
-doc = minidom.Document()
-root = doc.createElement('root')
-doc.appendChild(root)
-main = doc.createElement('Text')
-root.appendChild(main)
+employee = employee()
+employee.setEmployee('bill', 'minear', '8.00', '20.00')
+employee.employeeToXML()
 
-text = doc.createTextNode('Some text here')
-main.appendChild(text)
-f = open('test.xml', 'a')
-root.writexml(f)
-f.close()
