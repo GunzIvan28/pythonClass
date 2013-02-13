@@ -27,6 +27,7 @@ class employee(object):
 		doc = minidom.Document()
 		root = doc.createElement('Employees')
 		doc.appendChild(root)
+		""" Need 'Employee' child """
 		list = ['firstName', 'lastName', 'hourlyWage', 'hoursWorked']
 		for each in list:
 			child = doc.createElement(each.title())
@@ -36,6 +37,8 @@ class employee(object):
 		f = open('test.xml', 'w')
 		root.writexml(f)
 		f.close()
+
+def 
 
 """
 Needed XML abilities:

@@ -1,16 +1,19 @@
 #!/usr/bin/python
 
 from time import sleep
-from menu import clear
-from payroll import employee
+from menu import clear			# Mine
+from payroll import employee	# Mine
 employee = employee()
 
 def mainMenu():
 	while True:
 		try:
 			clear()
-			print 'Welcome to the Payroll System.'
-			print 'What would you like to do?'
+			print '-' * 14 
+			print 'Payroll System'
+			print '-' * 14 
+			print '\nWhat would you like to do?'
+			print '-' * 26
 			print '1.) View employee report'
 			print '2.) Add new employee'
 			print '3.) Update employee'
@@ -35,8 +38,6 @@ def main(mainMenuAnswer):
 
 	if mainMenuAnswer == 5:
 		clear()
-		print 'Thank you for using the Payroll System.'
-		sleep(2)
 		exit()
 
 
