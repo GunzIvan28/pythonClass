@@ -4,7 +4,7 @@ Employee Module
 
 Where do I check to see if the xml file exists?
 """
-import os
+from os.path import exists
 from xml.dom import minidom
 
 class employee(object):
@@ -42,12 +42,33 @@ class employee(object):
 		root.writexml(f)
 		f.close()
 
-def fileCheck():
-	if os.path.exists('employeeReport.xml')
+	def employeeCheck(self, firstName, lastName):	
+		employeeData = open('employeeData.xml', 'r')
+		xml = minidom.parse()
 
-def viewEmployee():
-	try:
-		open('employeeReport.xml', )
+
+
+def fileCheck():
+	if exists('employeeData.xml'):
+		try:
+			xml = open('employeeData.xml', 'r')
+			xml.close()
+			return 0 
+		except IOError:
+			return 1 
+	else:
+		try:
+			newXml = minidom.Document()
+			rootElement = newXml.createElement('Employees')
+			newXml.appendChild(rootElement)
+			newFile = open('employeeData.xml', 'w')
+			newXml.writexml(newFile)
+			newFile.close()
+			return 0
+		except IOError:
+			return 2
+
+
 
 """
 Needed XML abilities:

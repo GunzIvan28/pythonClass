@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
 from time import sleep
-from menu import clear			# Mine
-from payroll import employee	# Mine
+from menu import clear		# Mine
+from payroll import *		# Mine
+
 employee = employee()
+fileCheckValue = None
 
 def mainMenu():
 	while True:
@@ -40,6 +42,28 @@ def main(mainMenuAnswer):
 		clear()
 		exit()
 
+# Check on program start.
+#	If exists, fileCheckValue = 0 
+#	If not and created, fileCheckValue = 0
+#	If failed for:
+#		Unable to open existing
+#			fileCheckValue = 1
+#		Unable to create
+#			fileCheckValue = 2
 
 while True:
+	while fileCheckValue == None:
+		fileCheckValue = fileCheck()
+		if fileCheckValue == 0:
+			pass
+		elif fileCheckValue == 1:
+			print 'Unable to read employeeReport.xml. Check file permissions.'
+			raw_input('Press ENTER to exit the program.')
+			exit()
+		elif fileCheckValue == 2:
+			print 'employeeReport.xml could not be created.\n'
+			print 'Manually create the file in the program directory '
+			print "or check the program's directory permissions."
+			raw_input('Press ENTER to exit the program.')
+			exit()
 	main(mainMenu())
