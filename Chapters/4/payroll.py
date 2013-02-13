@@ -1,6 +1,10 @@
 """
 Employee Module
+
+
+Where do I check to see if the xml file exists?
 """
+import os
 from xml.dom import minidom
 
 class employee(object):
@@ -38,7 +42,12 @@ class employee(object):
 		root.writexml(f)
 		f.close()
 
-def 
+def fileCheck():
+	if os.path.exists('employeeReport.xml')
+
+def viewEmployee():
+	try:
+		open('employeeReport.xml', )
 
 """
 Needed XML abilities:
