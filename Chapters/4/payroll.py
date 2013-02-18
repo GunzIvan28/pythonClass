@@ -26,8 +26,9 @@ class employee(object):
 		self.lastName = lastName
 		self.hourlyWage = hourlyWage
 		self.hoursWorked = hoursWorked
-		
+
 	def employeeToXML(self):
+		"""For testing"""
 		doc = minidom.Document()
 		root = doc.createElement('Employees')
 		doc.appendChild(root)
@@ -38,13 +39,32 @@ class employee(object):
 			root.appendChild(child)
 			childValue = doc.createTextNode(getattr(self,each))
 			child.appendChild(childValue)
-		f = open('test.xml', 'w')
+		f = open('employeeData.xml', 'w')
 		root.writexml(f)
 		f.close()
 
 	def employeeCheck(self, firstName, lastName):	
 		employeeData = open('employeeData.xml', 'r')
-		xml = minidom.parse()
+		xml = minidom.parse(employeeData)
+
+	def addEmployee(self):
+		employeeDataXml = minidom.parse('employeeData.xml')
+		root = employeeDataXml.documentElement
+		employee = employeeDataXml.createElement('Employee')
+		root.appendChild(employee)
+		list = ['firstName', 'lastName', 'hourlyWage', 'hoursWorked']
+		for each in list:
+			child = employeeDataXml.createElement(each.title())
+			employee.appendChild(child)
+			childValue = employeeDataXml.createTextNode(str(getattr(self,each)))
+			child.appendChild(childValue)
+		employeeDataFile = open('employeeData.xml', 'w')
+		root.writexml(employeeDataFile)
+		employeeDataFile.close()
+		root.unlink()
+
+
+
 
 
 
