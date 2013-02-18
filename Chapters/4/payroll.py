@@ -14,6 +14,7 @@ class employee(object):
 		self.lastName = None
 		self.hourlyWage = None
 		self.hoursWorked = None
+		# self.pathToEmployeeData = 'employeeData.xml'
 
 	def __str__(self):
 		return str(self.firstName) + '\n' + \
@@ -44,10 +45,22 @@ class employee(object):
 		f.close()
 
 	def employeeCheck(self, firstName, lastName):	
-		employeeData = open('employeeData.xml', 'r')
-		xml = minidom.parse(employeeData)
+		"""Looks for an employee in employeeData.xml"""
+		employeeDataXml = minidom.parse('employeeData.xml')
+		root = employeeDataXml.documentElement
+		employees = employeeDataXml.getElementsByTagName('Employee')
+		emps = []
+		for employee in employees:
+			empObj = employee.getElementsByTagName('Firstname')[0]
+			emps.append(empObj)
+		for emp in emps:
+			nodes = emp.childNodes
+			for node in nodes:
+				if node.nodeType == node.TEXT_NODE:
+					print node.data
 
 	def addEmployee(self):
+		"""Append employee to employeeData.xml"""
 		employeeDataXml = minidom.parse('employeeData.xml')
 		root = employeeDataXml.documentElement
 		employee = employeeDataXml.createElement('Employee')
