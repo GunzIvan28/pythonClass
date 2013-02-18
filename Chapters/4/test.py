@@ -35,47 +35,54 @@ def main(mainMenuAnswer):
 	if mainMenuAnswer == 2:
 		firstName = raw_input('Employee first name: ')
 		lastName = raw_input('Employee last name: ')
-		while True:
-			try:
-				hourlyWage = input('Hourly wage: ')
-				if hourlyWage < 0:
-					print 'Hourly wage must be higher than zero.'
-					raw_input('Press ENTER to input a new wage.')
-				else:
+		doesEmployeeExist = employeeCheck(firstName, lastName)
+		if doesEmployeeExist == True:
+			print '\nEmployee already exists.\n'
+			print 'Select Update Employee or Add/Remove Employee'
+			print 'at the main menu to modify an existing record.\n'
+			raw_input('Press ENTER to return to the main menu.')
+		elif doesEmployeeExist == False:
+			while True:
+				try:
+					hourlyWage = input('Hourly wage: ')
+					if hourlyWage < 0:
+						print 'Hourly wage must be higher than zero.'
+						raw_input('Press ENTER to input a new wage.')
+					else:
+						break
+				except (NameError, SyntaxError):
+					raw_input('Invalid input. Press ENTER to try again.')
+			while True:
+				try:
+					hoursWorked = input('Hours worked: ')
+					if hoursWorked < 0:
+						print 'Hours worked cannot be less than zero.'
+						raw_input('Press ENTER to input a new wage.')
+					else:
+						break
+				except (NameError, SyntaxError):
+					raw_input('Invalid input. Press ENTER to try again.')
+			while True:
+				clear()
+				print 'Before the new user is added, please verify the following:'
+				print 'First Name:', firstName
+				print 'Last Name:', lastName
+				print 'Hourly Wage: $%.2f/hr' % hourlyWage
+				print 'Hours Worked: %.2f' % hoursWorked
+				print 'Is this information correct?'
+				isInputCorrect = raw_input('(y/n) --> ')
+				if isInputCorrect == 'y':
+					employee.setEmployee(firstName, lastName, hourlyWage, hoursWorked)
+					employee.addEmployee()
+					print 'Employee successfully added.'
+					raw_input('Press ENTER to continue.')
 					break
-			except (NameError, SyntaxError):
-				raw_input('Invalid input. Press ENTER to try again.')
-		while True:
-			try:
-				hoursWorked = input('Hours worked: ')
-				if hoursWorked < 0:
-					print 'Hours worked cannot be less than zero.'
-					raw_input('Press ENTER to input a new wage.')
-				else:
+				elif isInputCorrect == 'n':
+					print 'No employee information has been saved.'
+					raw_input('Press ENTER to return to the main menu.')
 					break
-			except (NameError, SyntaxError):
-				raw_input('Invalid input. Press ENTER to try again.')
-		while True:
-			clear()
-			print 'Before the new user is added, please verify the following:'
-			print 'First Name:', firstName
-			print 'Last Name:', lastName
-			print 'Hourly Wage: $%.2f/hr' % hourlyWage
-			print 'Hours Worked: %.2f' % hoursWorked
-			print 'Is this information correct?'
-			isInputCorrect = raw_input('(y/n) --> ')
-			if isInputCorrect == 'y':
-				employee.setEmployee(firstName, lastName, hourlyWage, hoursWorked)
-				employee.addEmployee()
-				print 'Employee successfully added.'
-				raw_input('Press ENTER to continue.')
-				break
-			elif isInputCorrect == 'n':
-				print 'No employee information has been saved.'
-				raw_input('Press ENTER to return to the main menu.')
-				break
-			else:
-				raw_input('Please answer y or n. Press ENTER to continue.')
+				else:
+					raw_input('Please answer y or n. Press ENTER to continue.')
 
 	# if mainMenuAnswer == 3:
 

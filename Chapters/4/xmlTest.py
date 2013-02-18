@@ -7,7 +7,9 @@ from xml.dom.minidom import *
 
 fileCheck()
 employee = employee()
-employee.employeeCheck('Bill','Minear')
+firstName = raw_input('First name: ')
+lastName = raw_input('Last name: ')
+employeeCheck(firstName, lastName)
 
 
 
