@@ -44,7 +44,7 @@ class employee(object):
 		root.writexml(f)
 		f.close()
 
-	def employeeCheck(self, firstName, lastName):	
+	def employeeCheck(self, firstName, lastName):
 		"""Looks for an employee in employeeData.xml"""
 		employeeDataXml = minidom.parse('employeeData.xml')
 		root = employeeDataXml.documentElement
