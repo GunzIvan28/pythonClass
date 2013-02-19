@@ -9,21 +9,24 @@ def employeeCheck(firstName, lastName):
 	employeeDataXml = minidom.parse('employeeData.xml')
 	root = employeeDataXml.documentElement
 	employees = employeeDataXml.getElementsByTagName('Employee')
-	for employee in employees:
-		firstNameNodes = employee.getElementsByTagName('Firstname')[0].childNodes
-		for firstNameNode in firstNameNodes:
-			if firstNameNode.data == firstName.lower():
-				lastNameNodes = employee.getElementsByTagName('Lastname')[0].childNodes
-				for lastNameNode in lastNameNodes:
-					if lastNameNode.data == lastName.lower():
-						root.unlink()
-						return True
-					else:
-						root.unlink()
-						return False
-			else:
-				root.unlink()
-				return False
+	if len(employees) == 0:
+		return False
+	else:
+		for employee in employees:
+			firstNameNodes = employee.getElementsByTagName('Firstname')[0].childNodes
+			for firstNameNode in firstNameNodes:
+				if firstNameNode.data == firstName.lower():
+					lastNameNodes = employee.getElementsByTagName('Lastname')[0].childNodes
+					for lastNameNode in lastNameNodes:
+						if lastNameNode.data == lastName.lower():
+							root.unlink()
+							return True
+						else:
+							root.unlink()
+							return False
+				else:
+					root.unlink()
+					return False
 
 
 
