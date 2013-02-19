@@ -4,32 +4,6 @@ Employee Module
 from os.path import exists
 from xml.dom import minidom
 
-def employeeCheck(firstName, lastName):
-	"""Looks for an employee in employeeData.xml"""
-	employeeDataXml = minidom.parse('employeeData.xml')
-	root = employeeDataXml.documentElement
-	employees = employeeDataXml.getElementsByTagName('Employee')
-	if len(employees) == 0:
-		return False
-	else:
-		for employee in employees:
-			firstNameNodes = employee.getElementsByTagName('Firstname')[0].childNodes
-			for firstNameNode in firstNameNodes:
-				if firstNameNode.data == firstName.lower():
-					lastNameNodes = employee.getElementsByTagName('Lastname')[0].childNodes
-					for lastNameNode in lastNameNodes:
-						if lastNameNode.data == lastName.lower():
-							root.unlink()
-							return True
-						else:
-							root.unlink()
-							return False
-				else:
-					root.unlink()
-					return False
-
-
-
 def fileCheck():
 	"""Creates file and/or verifies file mutability."""
 	if exists('employeeData.xml'):
@@ -51,6 +25,40 @@ def fileCheck():
 		except IOError:
 			return 2
 
+def employeeCheck(firstName, lastName):
+	"""Looks for an employee in employeeData.xml"""
+	employeeDataXml = minidom.parse('employeeData.xml')
+	employees = employeeDataXml.getElementsByTagName('Employee')
+	if len(employees) == 0:
+		employeeDataXml.unlink()
+		return False
+	else:
+		for employee in employees:
+			firstNameNode = employee.getElementsByTagName('Firstname')[0].childNodes[0].data
+			lastNameNode = employee.getElementsByTagName('Lastname')[0].childNodes[0].data
+			if firstNameNode == firstName.lower() and lastNameNode == lastName.lower():
+				employeeDataXml.unlink()
+				return True
+		employeeDataXml.unlink()
+		return False
+
+def addEmployee(firstName, lastName, hourlyWage, hoursWorked):
+	"""Append employee to employeeData.xml"""
+	employeeDataXml = minidom.parse('employeeData.xml')
+	root = employeeDataXml.documentElement
+	employee = employeeDataXml.createElement('Employee')
+	root.appendChild(employee)
+	attributeList = ['firstName', 'lastName', 'hourlyWage', 'hoursWorked']
+	employeeValues = [firstName, lastName, hourlyWage, hoursWorked]
+	for i in xrange(0, 4):
+		child = employeeDataXml.createElement(attributeList[i].title())
+		employee.appendChild(child)
+		childValue = employeeDataXml.createTextNode(str(employeeValues[i]).lower())
+		child.appendChild(childValue)
+	employeeDataFile = open('employeeData.xml', 'w')
+	root.writexml(employeeDataFile)
+	employeeDataFile.close()
+	employeeDataXml.unlink()
 
 class employee(object):
 	"""Class for manipulating employee payroll information."""
@@ -68,48 +76,59 @@ class employee(object):
 		str(self.hourlyWage) + '\n' + \
 		str(self.hoursWorked)
 
-	def setEmployee(self, firstName, lastName, hourlyWage, hoursWorked):
-		"""Assign values to employee attributes."""
-		self.firstName = firstName.lower()
-		self.lastName = lastName.lower()
-		self.hourlyWage = str(float(hourlyWage))
-		self.hoursWorked = str(float(hoursWorked))
+	# def setEmployee(self, firstName, lastName, hourlyWage, hoursWorked):
+	# 	"""Assign values to employee attributes."""
+	# 	self.firstName = firstName.lower()
+	# 	self.lastName = lastName.lower()
+	# 	self.hourlyWage = str(float(hourlyWage))
+	# 	self.hoursWorked = str(float(hoursWorked))
 
-	def employeeToXML(self):
-		"""For testing"""
-		doc = minidom.Document()
-		root = doc.createElement('Employees')
-		doc.appendChild(root)
-		""" Need 'Employee' child """
-		list = ['firstName', 'lastName', 'hourlyWage', 'hoursWorked']
-		for each in list:
-			child = doc.createElement(each.title())
-			root.appendChild(child)
-			childValue = doc.createTextNode(getattr(self,each))
-			child.appendChild(childValue)
-		f = open('employeeData.xml', 'w')
-		root.writexml(f)
-		f.close()
+	# def employeeToXML(self):
+	# 	"""For testing"""
+	# 	doc = minidom.Document()
+	# 	root = doc.createElement('Employees')
+	# 	doc.appendChild(root)
+	# 	""" Need 'Employee' child """
+	# 	list = ['firstName', 'lastName', 'hourlyWage', 'hoursWorked']
+	# 	for each in list:
+	# 		child = doc.createElement(each.title())
+	# 		root.appendChild(child)
+	# 		childValue = doc.createTextNode(getattr(self,each))
+	# 		child.appendChild(childValue)
+	# 	f = open('employeeData.xml', 'w')
+	# 	root.writexml(f)
+	# 	f.close()
 
-	def addEmployee(self):
-		"""Append employee to employeeData.xml"""
+
+	def employeeImport(self, firstName, lastName):
+		"""Parses XML and stores selected employee info in employee object."""
 		employeeDataXml = minidom.parse('employeeData.xml')
-		root = employeeDataXml.documentElement
-		employee = employeeDataXml.createElement('Employee')
-		root.appendChild(employee)
-		list = ['firstName', 'lastName', 'hourlyWage', 'hoursWorked']
-		for element in list:
-			child = employeeDataXml.createElement(element.title())
-			employee.appendChild(child)
-			childValue = employeeDataXml.createTextNode(str(getattr(self,element)))
-			child.appendChild(childValue)
-		employeeDataFile = open('employeeData.xml', 'w')
-		root.writexml(employeeDataFile)
-		employeeDataFile.close()
-		root.unlink()
+		employees = employeeDataXml.getElementsByTagName('Employee')
+		for employee in employees:
+			firstNameNode = employee.getElementsByTagName('Firstname')[0].childNodes
+			lastNameNode = employee.getElementsByTagName('Lastname')[0].childNodes
+			if firstNameNode[0].data == firstName.lower() and lastNameNode[0].data == lastName.lower():
+				self.firstName 	 = firstName.lower()
+				self.lastName  	 = lastName.lower()
+				self.hourlyWage  = float(employee.getElementsByTagName('Hourlywage')[0].childNodes[0].data)
+				self.hoursWorked = float(employee.getElementsByTagName('Hoursworked')[0].childNodes[0].data)
+				employeeDataXml.unlink()
+				return True
+		return False
 
-
-
+	def printEmployeeReport(self):
+		"""Displays employee payroll information."""
+		print '%-12s%16s%16s%13s' % \
+			('-' * 4, '-' * 11, '-' * 12, '-' * 9)
+		print '%-12s%16s%16s%13s' % \
+			('Name', 'Hourly Wage', 'Hours Worked', 'Gross Pay')
+		print '%-12s%16s%16s%13s' % \
+			('-' * 4, '-' * 11, '-' * 12, '-' * 9)
+		print '%-10s%16.2f%16.2f%13.2f' % \
+			((self.lastName.title() + ', ' + self.firstName.title()),
+				self.hourlyWage,
+				self.hoursWorked,
+				(self.hourlyWage * self.hoursWorked))
 
 
 """

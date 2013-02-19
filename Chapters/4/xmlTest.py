@@ -5,13 +5,23 @@ from xml.dom.minidom import *
 # doc = impl.createDocument(None,'Employees', None)
 # doc.writexml('employeeData.xml')
 
-fileCheck()
-employee = employee()
-firstName = raw_input('First name: ')
-lastName = raw_input('Last name: ')
-employeeCheck(firstName, lastName)
+def test(test1, test2):
+	testLocals = locals()
+	for local in testLocals:
+		print local
+
+test('test1', 'test2')
 
 
+# fileCheck()
+# employee = employee()
+# firstName = raw_input('First name: ')
+# lastName = raw_input('Last name: ')
+# test = employee.employeeImport(firstName, lastName)
+# if test == True:
+# 	print employee
+# else:
+# 	print 'False'
 
 # dom = parse('employeeData.xml')
 # for node in dom.getElementsByTagName('Lastname'):

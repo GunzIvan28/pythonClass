@@ -23,16 +23,31 @@ def mainMenu():
 			print '5.) Exit'
 			mainMenuAnswer = input('--> ')
 			if mainMenuAnswer <  1 or mainMenuAnswer > 5:
-				tryAgain = raw_input('Invalid selection. Press ENTER to try again.')
+				raw_input('Invalid selection. Press ENTER to try again.')
 			else:
 				return mainMenuAnswer
 		except (NameError, SyntaxError):
-			tryAgain = raw_input('Invalid selection. Press ENTER to try again.')
+			raw_input('Invalid selection. Press ENTER to try again.')
 
 def main(mainMenuAnswer):
-	# if mainMenuAnswer == 1:
+	if mainMenuAnswer == 1:
+		"""Displays employee report table"""
+		clear()
+		firstName = raw_input('Employee first name: ')
+		lastName = raw_input('Employee last name: ')
+		clear()
+		doesEmployeeExist = employeeCheck(firstName, lastName)
+		if doesEmployeeExist == True:
+			employee.employeeImport(firstName, lastName)
+			employee.printEmployeeReport()
+			raw_input('\nPress ENTER to return to the main menu.')
+		elif doesEmployeeExist == False:
+			print 'No employee record for', firstName, lastName + '.\n'
+			raw_input('Press ENTER to return to the main menu.')
 
 	if mainMenuAnswer == 2:
+		"""Adds employee to employeeData.xml"""
+		clear()
 		firstName = raw_input('Employee first name: ')
 		lastName = raw_input('Employee last name: ')
 		doesEmployeeExist = employeeCheck(firstName, lastName)
@@ -64,16 +79,15 @@ def main(mainMenuAnswer):
 					raw_input('Invalid input. Press ENTER to try again.')
 			while True:
 				clear()
-				print 'Before the new user is added, please verify the following:'
+				print 'Before the new user is added, please verify the following:\n'
 				print 'First Name:', firstName
 				print 'Last Name:', lastName
 				print 'Hourly Wage: $%.2f/hr' % hourlyWage
 				print 'Hours Worked: %.2f' % hoursWorked
-				print 'Is this information correct?'
+				print '\nIs this information correct?'
 				isInputCorrect = raw_input('(y/n) --> ')
 				if isInputCorrect == 'y':
-					employee.setEmployee(firstName, lastName, hourlyWage, hoursWorked)
-					employee.addEmployee()
+					addEmployee(firstName, lastName, hourlyWage, hoursWorked)
 					print 'Employee successfully added.'
 					raw_input('Press ENTER to continue.')
 					break
