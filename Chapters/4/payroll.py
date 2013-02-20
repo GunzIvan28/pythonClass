@@ -60,6 +60,9 @@ def addEmployee(firstName, lastName, hourlyWage, hoursWorked):
 	employeeDataFile.close()
 	employeeDataXml.unlink()
 
+def updateEmployee(self, firstName, lastName)
+ujj
+
 class employee(object):
 	"""Class for manipulating employee payroll information."""
 
@@ -99,7 +102,6 @@ class employee(object):
 	# 	root.writexml(f)
 	# 	f.close()
 
-
 	def employeeImport(self, firstName, lastName):
 		"""Parses XML and stores selected employee info in employee object."""
 		employeeDataXml = minidom.parse('employeeData.xml')
@@ -118,14 +120,16 @@ class employee(object):
 
 	def printEmployeeReport(self):
 		"""Displays employee payroll information."""
-		print '%-12s%16s%16s%13s' % \
+		print '%-6s%16s%16s%13s' % \
 			('-' * 4, '-' * 11, '-' * 12, '-' * 9)
-		print '%-12s%16s%16s%13s' % \
+		print '%-6s%16s%16s%13s' % \
 			('Name', 'Hourly Wage', 'Hours Worked', 'Gross Pay')
-		print '%-12s%16s%16s%13s' % \
+		print '%-6s%16s%16s%13s' % \
 			('-' * 4, '-' * 11, '-' * 12, '-' * 9)
-		print '%-10s%16.2f%16.2f%13.2f' % \
-			((self.lastName.title() + ', ' + self.firstName.title()),
+		if len(self.lastName) > 
+		print '%.12s, %.1s%15.2f%16.2f%13.2f' % \
+			(self.lastName.title(),
+				self.firstName.title(),
 				self.hourlyWage,
 				self.hoursWorked,
 				(self.hourlyWage * self.hoursWorked))
