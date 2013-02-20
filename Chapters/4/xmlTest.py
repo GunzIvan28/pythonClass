@@ -1,16 +1,19 @@
-from payroll import *
-from xml.dom.minidom import *
+# from payroll import *
+# from xml.dom.minidom import *
+from menus import *
+
+mainMenu()
 
 # impl = getDOMImplementation()
 # doc = impl.createDocument(None,'Employees', None)
 # doc.writexml('employeeData.xml')
 
-def test(test1, test2):
-	testLocals = locals()
-	for local in testLocals:
-		print local
+# def test(test1, test2):
+# 	testLocals = locals()
+# 	for local in testLocals:
+# 		print local
 
-test('test1', 'test2')
+# test('test1', 'test2')
 
 
 # fileCheck()
