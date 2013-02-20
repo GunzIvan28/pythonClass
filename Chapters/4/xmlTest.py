@@ -2,7 +2,7 @@
 # from xml.dom.minidom import *
 from menus import *
 
-mainMenu()
+print newEmployee() 
 
 # impl = getDOMImplementation()
 # doc = impl.createDocument(None,'Employees', None)

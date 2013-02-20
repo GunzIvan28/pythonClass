@@ -28,14 +28,26 @@ def getEmployeeName():
 	"""Takes first/last name as input and returns them in list format."""
 	firstName = raw_input("Enter the employee's first name: ")
 	lastName = raw_input("Enter the employee's last name: ")
-	employeeName = [firstName, lastName]
+	employeeName = [firstName.lower(), lastName.lower()]
 	return employeeName
 
 def newEmployee():
 	"""Accepts first/last name, wage, and hours worked as input and returns them in list format."""
 	employeeValues = getEmployeeName()
-	hourlyWage = raw_input("Enter the employee's hourly wage: ")
-	hoursWorked = raw_input("Enter the number of hours worked: ")
+	while True:
+		hourlyWage = raw_input("Enter the employee's hourly wage: ")
+		try:
+			hourlyWage = float(hourlyWage)
+			break
+		except ValueError:
+			raw_input('Invalid input. Press ENTER to try again.')
+	while True:
+		hoursWorked = raw_input("Enter the number of hours worked: ")
+		try:
+			hoursWorked = float(hoursWorked)
+			break
+		except ValueError:
+			raw_input('Invalid input. Press ENTER to try again.')
 	employeeValues.extend([hourlyWage, hoursWorked])
 	return employeeValues
 
