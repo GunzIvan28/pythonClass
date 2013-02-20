@@ -2,6 +2,7 @@
 # from xml.dom.minidom import *
 from menus import *
 from payrollXml import *
+from employee import employee
 
 doesFileExist = fileCheck()
 if doesFileExist == 0:
@@ -11,7 +12,11 @@ elif doesFileExist == 1:
 elif doesFileExist == 2:
 	raw_input('File could not be written to.')
 
-test(getEmployeeName())
+employee = employee(getEmployeeInfo(getEmployeeName()))
+print employee
+
+
+# print getEmployeeInfo(getEmployeeName())
 # addEmployee(newEmployee())
 
 # impl = getDOMImplementation()

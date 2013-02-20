@@ -43,6 +43,7 @@ def addEmployee(newEmployeeValues):
 	employeeDataXml.unlink()
 
 def removeEmployee(employeeName):
+	"""Removes employee from XML based on first/last name."""
 	employeeDataXml = minidom.parse('employeeData.xml')
 	root = employeeDataXml.documentElement
 	employees = employeeDataXml.getElementsByTagName('Employee')
@@ -55,3 +56,21 @@ def removeEmployee(employeeName):
 	root.writexml(employeeDataFile)
 	employeeDataFile.close()
 	employeeDataXml.unlink()
+
+def getEmployeeInfo(employeeName):
+	"""Parses XML and stores selected employee info in employee object."""
+	employeeDataXml = minidom.parse('employeeData.xml')
+	employees = employeeDataXml.getElementsByTagName('Employee')
+	for employee in employees:
+		firstNameNode = employee.getElementsByTagName('FirstName')[0].childNodes[0].data
+		lastNameNode = employee.getElementsByTagName('LastName')[0].childNodes[0].data
+		if firstNameNode == employeeName[0] and lastNameNode == employeeName[1]:
+			hourlyWage = float(employee.getElementsByTagName('HourlyWage')[0].childNodes[0].data)
+			hoursWorked = float(employee.getElementsByTagName('HoursWorked')[0].childNodes[0].data)
+			employeeInfo = [employeeName[0], employeeName[1], hourlyWage, hoursWorked]
+			return employeeInfo
+
+def updateEmployee():
+	employeeDataXml = minidom.parse('employeeData.xml')
+	employees = employeeDataXml.getElementsByTagName('Employee')
+	
