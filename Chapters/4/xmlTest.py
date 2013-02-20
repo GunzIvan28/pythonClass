@@ -1,8 +1,18 @@
 # from payroll import *
 # from xml.dom.minidom import *
 from menus import *
+from payrollXml import *
 
-print newEmployee() 
+doesFileExist = fileCheck()
+if doesFileExist == 0:
+	pass
+elif doesFileExist == 1:
+	raw_input('File could not be created.')
+elif doesFileExist == 2:
+	raw_input('File could not be written to.')
+
+test(getEmployeeName())
+# addEmployee(newEmployee())
 
 # impl = getDOMImplementation()
 # doc = impl.createDocument(None,'Employees', None)

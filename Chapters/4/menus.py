@@ -20,6 +20,7 @@ def mainMenu():
 			if int(mainMenuAnswer) <  1 or int(mainMenuAnswer) > 5:
 				raw_input('Invalid selection. Press ENTER to try again.')
 			else:
+				# Return value maybe needs to be an integer?
 				return mainMenuAnswer
 		except ValueError:
 				raw_input('Invalid input. Press ENTER to try again.')
@@ -32,22 +33,28 @@ def getEmployeeName():
 	return employeeName
 
 def newEmployee():
-	"""Accepts first/last name, wage, and hours worked as input and returns them in list format."""
-	employeeValues = getEmployeeName()
+	"""Takes first/last name, wage, and hours worked as input and returns them in list format."""
+	newEmployeeValues = getEmployeeName()
 	while True:
 		hourlyWage = raw_input("Enter the employee's hourly wage: ")
 		try:
-			hourlyWage = float(hourlyWage)
-			break
+			if float(hourlyWage) <= 0:
+				raw_input('Wage can not be less than zero. Press ENTER to try again.')
+			else:
+				hourlyWage = float(hourlyWage)
+				break
 		except ValueError:
 			raw_input('Invalid input. Press ENTER to try again.')
 	while True:
 		hoursWorked = raw_input("Enter the number of hours worked: ")
 		try:
-			hoursWorked = float(hoursWorked)
-			break
+			if float(hoursWorked) < 0:
+				raw_input('Hours worked can not be less than zero. Press ENTER to try again.')
+			else:
+				hoursWorked = float(hoursWorked)
+				break
 		except ValueError:
 			raw_input('Invalid input. Press ENTER to try again.')
-	employeeValues.extend([hourlyWage, hoursWorked])
-	return employeeValues
+	newEmployeeValues.extend([hourlyWage, hoursWorked])
+	return newEmployeeValues
 
