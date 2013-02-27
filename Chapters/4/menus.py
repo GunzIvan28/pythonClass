@@ -1,6 +1,8 @@
 """
 Menus for the Payroll program.
 """
+from employeeClass import employee
+from payrollXml import *
 
 def mainMenu():
 	while True:
@@ -57,4 +59,30 @@ def newEmployee():
 			raw_input('Invalid input. Press ENTER to try again.')
 	newEmployeeValues.extend([hourlyWage, hoursWorked])
 	return newEmployeeValues
+
+def updateEmployee():
+	"""Input: First/Last Name, Wage, Time"""
+	employee = employee(getEmployeeInfo(getEmployeeName()))
+	while True:
+		hourlyWage = raw_input("Enter the employee's hourly wage: ")
+		try:
+			if float(hourlyWage) <= 0:
+				raw_input('Wage can not be less than zero. Press ENTER to try again.')
+			else:
+				hourlyWage = float(hourlyWage)
+				break
+		except ValueError:
+			raw_input('Invalid input. Press ENTER to try again.')
+	while True:
+		hoursWorked = raw_input("Enter the number of hours worked: ")
+		try:
+			if float(hoursWorked) < 0:
+				raw_input('Hours worked can not be less than zero. Press ENTER to try again.')
+			else:
+				hoursWorked = float(hoursWorked)
+				break
+		except ValueError:
+			raw_input('Invalid input. Press ENTER to try again.')
+
+	
 
