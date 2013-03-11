@@ -103,3 +103,22 @@ for eachSet in allMoveCoordinates:
 
 
 # """
+
+for eachSet in allMoveCoordinates:
+	# Splits list item into [0] for row, [1] for move index.
+	moveCoordinates = eachSet.split(':')
+	moveCoordinates = map(int, moveCoordinates)
+	try:
+		# Stores X or O based on coords.
+		playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
+		for i in xrange(4):
+			value = moveCoordinates[1] - i 
+			print value
+			# Checks value for positive index reference and matching move.
+			if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
+				print 'win!'
+			# If index reference is less than zero do nothing.
+			elif value < 0:
+				print 'less than zero'
+		except IndexError:
+			print 'Invalid index.'
