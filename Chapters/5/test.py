@@ -5,7 +5,7 @@ table = [['|O|', '|_|', '|_|', '|X|', '|_|', '|_|', '|_|'],
 		['|_|', '|_|', '|O|', '|_|', '|_|', '|O|', '|_|'],
 		['|_|', '|_|', '|_|', '|_|', '|_|', '|_|', '|_|'],
 		['|_|', '|X|', '|_|', '|X|', '|_|', '|_|', '|_|'],
-		['|_|', '|_|', '|_|', '|X|', '|X|', '|_|', '|X|']]
+		['|_|', '|_|', '|_|', '|X|', '|X|', '|X|', '|X|']]
 
 # x = 0
 # for i in xrange((len(table) -1),-1,-1):
@@ -31,37 +31,65 @@ table = [['|O|', '|_|', '|_|', '|X|', '|_|', '|_|', '|_|'],
 # 			return False 
 
 # Init all moves dictionary.
-allMoveCoordinates = [] 
-# Loop through tables in table.
-for i in xrange((len(table) -1),-1,-1):
-	# Loop through the indecies of each table.
-	for item in range(len(table[i])):
-		# Search for X or O (moves).
-		if table[i][item] == '|X|' or table[i][item] == '|O|':
-			# If match: append to all moves dictionary.
-			# Key:Value = row:move index
-			allMoveCoordinates.append(str(i)+':'+str(item))
-			print allMoveCoordinates
+def getAllMoves():
+	allMoveCoordinates = [] 
+	# Loop through tables in table.
+	for i in xrange((len(table) -1),-1,-1):
+		# Loop through the indecies of each table.
+		for item in range(len(table[i])):
+			# Search for X or O (moves).
+			if table[i][item] == '|X|' or table[i][item] == '|O|':
+				# If match: append to all moves dictionary.
+				# Key:Value = row:move index
+				allMoveCoordinates.append(str(i)+':'+str(item))
+	return allMoveCoordinates
+
+def winCheck(allMoveCoordinates):
+	for eachSet in allMoveCoordinates:
+		# Splits list item into [0] for row, [1] for move index.
+		moveCoordinates = eachSet.split(':')
+		moveCoordinates = map(int, moveCoordinates)
+		try:
+			# Stores X or O based on coordinate return.
+			playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
+			winCondition = ''
+			for i in xrange(4):
+				value = moveCoordinates[1] - i 
+				# Checks value for positive index reference and matching move.
+				if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
+					# Creates variable that builds the win condition as it finds it.
+					# Win condition is either 'XXXX' or 'OOOO'.
+					winCondition += playerMarker[1]
+					if winCondition == 'XXXX' or winCondition == 'OOOO':
+						print winCondition[0], 'is the winner!'
+						break
+				# If index reference is less than zero do nothing.
+				elif value < 0:
+					pass
+		except IndexError:
+			print 'Invalid index.'
+
+winCheck(getAllMoves())
 
 # Iterating through the coordinates of moves stored in allMoveCoordinates.
 # Looking for matching move value three indices away.
-for eachSet in allMoveCoordinates:
-	# Splits list item into [0] for row, [1] for move index.
-	moveCoordinates = eachSet.split(':')
-	moveCoordinates = map(int, moveCoordinates)
-	try:
-		# Stores X or O based on coords.
-		playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
-		value = moveCoordinates[1] - 3 
-		print value
-		# Checks value for positive index reference and matching move.
-		if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
-			print 'win!'
-		# If index reference is less than zero do nothing.
-		elif value < 0:
-			print 'less than zero'
-	except IndexError:
-		print 'Invalid index.'
+# for eachSet in allMoveCoordinates:
+# 	# Splits list item into [0] for row, [1] for move index.
+# 	moveCoordinates = eachSet.split(':')
+# 	moveCoordinates = map(int, moveCoordinates)
+# 	try:
+# 		# Stores X or O based on coords.
+# 		playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
+# 		value = moveCoordinates[1] - 3 
+# 		print value
+# 		# Checks value for positive index reference and matching move.
+# 		if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
+# 			print 'win!'
+# 		# If index reference is less than zero do nothing.
+# 		elif value < 0:
+# 			print 'less than zero'
+# 	except IndexError:
+# 		print 'Invalid index.'
 
 # """
 # Function: tableParse()
@@ -104,21 +132,3 @@ for eachSet in allMoveCoordinates:
 
 # """
 
-for eachSet in allMoveCoordinates:
-	# Splits list item into [0] for row, [1] for move index.
-	moveCoordinates = eachSet.split(':')
-	moveCoordinates = map(int, moveCoordinates)
-	try:
-		# Stores X or O based on coords.
-		playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
-		for i in xrange(4):
-			value = moveCoordinates[1] - i 
-			print value
-			# Checks value for positive index reference and matching move.
-			if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
-				print 'win!'
-			# If index reference is less than zero do nothing.
-			elif value < 0:
-				print 'less than zero'
-		except IndexError:
-			print 'Invalid index.'
