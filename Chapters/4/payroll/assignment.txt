@@ -1,0 +1,6 @@
+The payroll department keeps a list of employee information for each pay period in a text file.  The format of each file is the following:
+
+<last name>  <hourly wage>  <hours worked>
+
+Write a program that inputs a filename from the user and prints to the terminal a report of the wages paid to the employees for the given period.  The report should be in tabular format with the appropriate header.  Each line should contain an employee's name, the hours worked, and the wages paid for that period.
+
