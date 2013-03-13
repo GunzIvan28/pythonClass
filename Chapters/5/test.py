@@ -23,6 +23,8 @@ def winCheck(allMoveCoordinates):
 	for eachSet in allMoveCoordinates:
 		moveCoordinates = eachSet.split(':')
 		moveCoordinates = map(int, moveCoordinates)
+
+		# Checks left.
 		try:
 			playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
 			winCondition = ''
@@ -31,8 +33,69 @@ def winCheck(allMoveCoordinates):
 				if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
 					winCondition += playerMarker[1]
 						if conditionCheck(winCondition) == playerMarker:
-							break
+							winner(playerMarker)
 				elif value < 0:
+					pass
+		except IndexError:
+			print 'Invalid index.'
+
+		# Checks right.
+		try:
+			playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
+			winCondition = ''
+			for i in xrange(4):
+				value = moveCoordinates[1] + i 
+				if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
+					winCondition += playerMarker[1]
+						if conditionCheck(winCondition) == playerMarker:
+							winner(playerMarker)
+				elif value < 0:
+					pass
+		except IndexError:
+			print 'Invalid index.'
+
+		# Check up.
+		try:
+			playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
+			winCondition = ''
+			for i in xrange(4):
+				value = moveCoordinates[0] - i 
+				if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
+					winCondition += playerMarker[1]
+						if conditionCheck(winCondition) == playerMarker:
+							winner(playerMarker)
+				elif value < 0:
+					pass
+		except IndexError:
+			print 'Invalid index.'
+
+		# Check down.
+		try:
+			playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
+			winCondition = ''
+			for i in xrange(4):
+				value = moveCoordinates[0] + i 
+				if value >= 0 and table[moveCoordinates[0]][value] == (playerMarker):
+					winCondition += playerMarker[1]
+						if conditionCheck(winCondition) == playerMarker:
+							winner(playerMarker)
+				elif value < 0:
+					pass
+		except IndexError:
+			print 'Invalid index.'
+
+		# Check down.
+		try:
+			playerMarker = table[moveCoordinates[0]][moveCoordinates[1]]
+			winCondition = ''
+			for i in xrange(4):
+				row = moveCoordinates[0] + i 
+				move = moveCoordinates[1] + i
+				if row >= 0 and move >= 0 and table[row][move] == (playerMarker):
+					winCondition += playerMarker[1]
+						if conditionCheck(winCondition) == playerMarker:
+							winner(playerMarker)
+				elif row < 0 or move < 0:
 					pass
 		except IndexError:
 			print 'Invalid index.'
@@ -40,6 +103,12 @@ def winCheck(allMoveCoordinates):
 def conditionCheck(winCondition):
 	if winCondition == 'XXXX' or winCondition == 'OOOO':
 		return winCondition[0]
+
+def winner(playerMarker):
+	print playerMarker, 'wins the game!'
+	while True:
+		raw_input('Press ENTER to continue.')
+		exit()
 
 
 winCheck(getAllMoves())
