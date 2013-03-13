@@ -15,6 +15,9 @@ table = [['|O|', '|_|', '|_|', '|X|', '|X|', '|_|', '|_|'],
 		['|x|', '|X|', '|_|', '|X|', '|_|', '|_|', '|_|'],
 		['|_|', '|_|', '|_|', '|X|', '|X|', '|X|', '|X|']]
 
+
+
+# Paramters are the starting x and y of the diagonal. 
 def diagCheck(x, y, counter):
 	moves = ''
 	for i in xrange((y + 1)):
@@ -36,8 +39,6 @@ def diagCheck(x, y, counter):
 			diagCheck(1, 6, counter)
 	elif counter == 6:
 		return False
-
-
 
 def conditionCheck(moves):
 	if 'XXXX' in moves:
