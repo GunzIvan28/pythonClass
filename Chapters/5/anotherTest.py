@@ -1,4 +1,5 @@
-x = 4
+import time
 
-for i in xrange((x + 1)):
-	print i
+time.clock()
+time.sleep(15)
+print time.clock()
