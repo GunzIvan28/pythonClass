@@ -19,7 +19,6 @@ def placeMove(playerMove):
 			return True	
 	return False
 
-
 def player(i):
 	"""Changes player and accepts move selection."""
 	if (i % 2) == 0:
@@ -30,6 +29,7 @@ def player(i):
 		return chooseMove('O')
 
 def chooseMove(player):
+	"""Asks for the player's move and places it on the board."""
 	while True:
 		move = raw_input('Choose a number to drop a piece: ')
 		try:
