@@ -4,9 +4,10 @@ Program: Connect Four
 Author: Bill Minear
 
 Notes:
-	+) Probably one of the most human-readable-unfriendly
-		programs I've ever written.
-	+) Enough said.
+	+) Not very reader friendly.
+	+) Could benefit from separating functions
+		into a separate file to be imported.
+	+) 
 
 """
 import os 
@@ -47,7 +48,7 @@ def chooseMove(player):
 			raw_input('Press ENTER to try again.')
 
 def placeMove(playerMove):
-	"""Checks board and places move selection."""
+	"""Checks board and places move."""
 	for row in xrange(5,-1,-1):
 		if table[row][playerMove[1] - 1] == '|_|':
 			table[row][playerMove[1] - 1] = '|' + playerMove[0] + '|'
@@ -77,11 +78,7 @@ def rowColumnCheck():
 
 def diagCheck(x=0, y=3, loop=4, counter=0):
 	"""Checks the ranges of diagonals that support possible win conditions.
-		This Function is ridiculous. Not only is it the most round-about
-		way to hard code diagonal checks but it acts really weird during
-		debugging. I have about 10 percent confidence in it and that's
-		only because it works when the program runs. 
-		 - In summary: Recursion is weird."""
+		This might be the ugliest thing I've ever written. Recursion is weird."""
 	moves = ''
 	for i in xrange(loop):
 		if i == 0:
@@ -128,7 +125,7 @@ def diagCheck(x=0, y=3, loop=4, counter=0):
 		return winner
 
 def winCheck(moves):
-	"""Parses argument for winning strings. """
+	"""Parses argument for winning strings."""
 	if 'XXXX' in moves:
 		return 'X'
 	elif 'OOOO' in moves:
