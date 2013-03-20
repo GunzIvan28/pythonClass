@@ -11,11 +11,9 @@ def drawCircle(myTurtle, startingPoint, radius):
 	myTurtle.setpos(startingPoint[0], startingPoint[1])
 	myTurtle.down()
 	for count in xrange(120):
+		myTurtle.left(3)
 		myTurtle.forward(move)
-		myTurtle.setheading(3)
 	myTurtle.mainloop()
-
-
 
 def main():
 	clearScreen()
@@ -29,6 +27,10 @@ def main():
 		except NameError:
 			print '\nInput must be numerical.'
 			raw_input('Press ENTER to try again.')
+	print "\nWe'll now draw the circle."
+	print 'To exit the program when the circle is complete'
+	print 'just close the window.'
+	raw_input('Press ENTER to continue.')
 	myTurtle = turtle
 	drawCircle(myTurtle, startingPoint, radius)
 
