@@ -6,8 +6,7 @@ Author: Bill Minear
 Notes:
 	+) Not very reader friendly.
 	+) Could benefit from separating functions
-		into a separate file to be imported.
-	+) 
+		into a separate file for importing.
 
 """
 import os 
