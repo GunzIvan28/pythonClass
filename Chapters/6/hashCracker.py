@@ -62,9 +62,7 @@ def hashCrack(characters, counter):
 									fancyPrintAndCheck(eighthHash, password, counter)
 
 def fancyPrintAndCheck(hashValue, password, counter):
-	clearScreen()
-	print 'Cracking hash...\n'
-	print '\t', hashValue	
+	print '\t', hashValue, password	
 	if counter > 3:
 		exit()
 	if hashValue == hash1:

@@ -1,6 +1,5 @@
-import hashlib
+import time
 
-hashCall = hashlib.md5()
-pw = 'aaaaaaab'
-hashCall.update(pw)
-print hashCall.hexdigest()
+localtime = time.asctime(time.localtime(time.time()))
+myTime = "Time:" + localtime
+print myTime
