@@ -8,7 +8,7 @@ Notes:
 		and what I was able to implement.
 		+) Not sure if there's a version
 			difference or if I've just 
-			missed something.
+			misinterpreted something.
 		+) Mostly used
 			http://docs.python.org/2/library/turtle.html
 			for syntax and the book for
@@ -23,7 +23,7 @@ def clearScreen():
     os.system(['clear','cls'][os.name == 'nt']) 
 
 def drawCircle(myTurtle, centerPoint, radius):
-	"""Utilizes arguments to draw a circle."""
+	"""Draws circle with turtle object based on inputs	."""
 	move = 2.0 * pi * radius / 120.0
 	myTurtle.setheading(90) # Orient turtle North.
 	myTurtle.up()
