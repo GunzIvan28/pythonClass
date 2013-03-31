@@ -1,98 +1,77 @@
-# Lower case ASCII: a(97), z(122)
+"""
+Program: Password Hash Cracker
+Author: Bill Minear (Borrowed from example assignment.)
 
-import hashlib
-import os 
+Notes:
+	+) Not sure if my counter operates the way I'd like
+		it to because it's being modified in a different
+		namespace. This only effects the program ending.
+		You could check the file for three separate hashes
+		and end it yourself.
+	+) The program outputs cracked hash info to a file
+		stored in the same directory as the program.
+		For whatever reason, the same two hashes are
+		output to the file over and over again as the
+		program runs. Seems to be a bug here. Not sure
+		if it's negatively effecting the program though
+		as it seems to continue working as intended.
+	+) Was unable to crack the last hash. "drink" and
+		"your" happen pretty quickly. The program was
+		working on 7 letter passwords overnight when
+		Windows Update decided it was time to reboot.
+		But, *ahem* through the use of a word list, I
+		was able to determine that the last password
+		is "ovaltine".
+"""
+import md5
+import time
 
-def clearScreen(): 
-    os.system(['clear','cls'][os.name == 'nt']) 
-
+counter = 0
+localtime = str(time.asctime(time.localtime(time.time())))
 hash1 = '0b18a3d7b9c43ff1750d2baa4606b8d0'
 hash2 = '62cc0b4ebb0b57b40778179234246c38'
 hash3 = '17c0f75d610ec414e5c9be1a6059b65a'
-counter = 0
 
-def hashCrack(characters, counter):
-	hashCallOne = hashlib.md5()
-	for first in characters:
-		password = first
-		hashCallOne.update(password)
-		firstHash = hashCallOne.hexdigest()
-		fancyPrintAndCheck(firstHash, password, counter)
-		for second in characters:
-			hashCallTwo = hashlib.md5()
-			password = first + second
-			hashCallTwo.update(password)
-			secondHash = hashCallTwo.hexdigest()
-			fancyPrintAndCheck(secondHash, password, counter)
-			for third in characters:
-				hashCallThree = hashlib.md5()
-				password = first + second + third
-				hashCallThree.update(password)
-				thirdHash = hashCallThree.hexdigest()
-				fancyPrintAndCheck(thirdHash, password, counter)
-				for fourth in characters:
-					hashCallFour = hashlib.md5()
-					password = first + second + third + fourth
-					hashCallFour.update(password)
-					fourthHash = hashCallFour.hexdigest()
-					fancyPrintAndCheck(fourthHash, password, counter)
-					for fifth in characters:
-						hashCallFive = hashlib.md5()
-						password = first + second + third + fourth + fifth
-						hashCallFive.update(password)
-						fifthHash = hashCallFive.hexdigest()
-						fancyPrintAndCheck(fifthHash, password, counter)
-						for sixth in characters:
-							hashCallSix = hashlib.md5()
-							password = first + second + third + fourth + fifth + sixth
-							hashCallSix.update(password)
-							sixthHash = hashCallSix.hexdigest()
-							fancyPrintAndCheck(sixthHash, password, counter)
-							for seventh in characters:
-								hashCallSeven = hashlib.md5()
-								password = first + second + third + fourth + fifth + sixth + seventh
-								hashCallSeven.update(password)
-								seventhHash = hashCallSeven.hexdigest()
-								fancyPrintAndCheck(seventhHash, password, counter)
-								for eighth in characters:
-									hashCallEight = hashlib.md5()
-									password = first + second + third + fourth + fifth + sixth + seventh + eighth
-									hashCallEight.update(password)
-									eighthHash = hashCallEight.hexdigest()
-									fancyPrintAndCheck(eighthHash, password, counter)
+letters = []
+for num in xrange(97, 123):
+	letters.append(chr(num))
 
-def fancyPrintAndCheck(hashValue, password, counter):
-	print '\t', hashValue, password	
+def outputToFile(theHash, password, localtime, counter):
+	"""Outputs cracked hash info to a file stored in the same directory as the program."""
+	hashFile = open('crackedHashes.txt', 'a')
+	hashFile.write('\n\nHash: ' + str(theHash))
+	hashFile.write('\nPassword: ' + str(password))
+	hashFile.write('\nTime of crack: ' + localtime)
+	hashFile.close()
+	counter += 1
+
+def hashCheck(password, counter):
+	"""Checks for matching hashes."""
+	m = md5.new(password)
 	if counter > 3:
 		exit()
-	if hashValue == hash1:
-		crackedHashInfo = 'Hash1 is:', password
-		crackedHashes = open('crackedHashes.txt', 'a')	
-		crackedHashes.write(crackedHashInfo)
-		crackedHashes.close()
-		counter += 1
-	elif hashValue == hash2:
-		crackedHashInfo = 'Hash2 is:', password
-		crackedHashes = open('crackedHashes.txt', 'a')	
-		crackedHashes.write(crackedHashInfo)
-		crackedHashes.close()
-		counter += 1
-	elif hashValue == hash3:
-		crackedHashInfo = 'Hash3 is:', password
-		crackedHashes = open('crackedHashes.txt', 'a')	
-		crackedHashes.write(crackedHashInfo)
-		crackedHashes.close()
-		counter += 1
+	if (m.hexdigest() == hash1):
+		outputToFile(hash1, password, localtime, counter)
+	elif (m.hexdigest() == hash2):
+		outputToFile(hash2, password, localtime, counter)
+	elif (m.hexdigest() == hash3):
+		outputToFile(hash3, password, localtime, counter)
 
+def hashCreation(width, position, testPass, counter):
+	"""Creates hashes and passes them to hashCheck."""
+	print 'Checking password:', testPass
+	for char in letters:
+		if (position < width - 1):
+			hashCreation(width, position + 1, testPass + char, counter)
+		hashCheck(testPass + char, counter)
 
-crackedHashes = open('crackedHashes.txt', 'a')
-crackedHashes.write('Starting...')
-crackedHashes.close()
-characters = ''
-for i in xrange(97,123):
-	characters += chr(i)
+def main():
+	"""Flow control."""
+	hashFile = open('crackedHashes.txt', 'w')
+	hashFile.write('Starting at: ' + localtime)
+	hashFile.close()
+	maxChars = 8
+	for value in range(1, maxChars + 1):
+		hashCreation(value, 0, "", counter)
 
-hashCrack(characters, counter)
-
-
-
+main()
