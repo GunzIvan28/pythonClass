@@ -25,3 +25,5 @@ class book(object):
 		bookObject = [self._title, self._author,
 						self._loanee, self._waitList]
 		return bookObject
+
+	
