@@ -13,7 +13,7 @@ Notes:
 		For whatever reason, the same two hashes are
 		output to the file over and over again as the
 		program runs. Seems to be a bug here. Not sure
-		if it's negatively effecting the program though
+		if it's negatively effecting the program, though
 		as it seems to continue working as intended.
 	+) Was unable to crack the last hash. "drink" and
 		"your" happen pretty quickly. The program was

@@ -12,6 +12,7 @@ Patron:
 class patron(object):
 
 	def __init__(self):
+		# Draw from fileInteraction. If no patron, return error.
 		self._firstName = ''
 		self._lastName = ''
 		self._checkedOutBooks = []

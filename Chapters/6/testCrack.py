@@ -1,5 +1,9 @@
-import time
+import md5
 
-localtime = time.asctime(time.localtime(time.time()))
-myTime = "Time:" + localtime
-print myTime
+hash3 = '17c0f75d610ec414e5c9be1a6059b65a'
+
+m = md5.new('ovaltine')
+if m.hexdigest() == hash3:
+	print 'Match!'
+else:
+	print 'Nope.'

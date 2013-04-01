@@ -1,10 +1,10 @@
-def new(self, firstName, lastName):
+def newPatron(firstName, lastName, books):
 	"""Adds new patron to patronFile.txt"""  
 	patronFile = open('patronFile.txt', 'a')
-	patronFile.write((','.join([firstName,lastName]) + '\n'))
+	patronFile.write(('|'.join([firstName,lastName,books]) + '\n'))
 	patronFile.close()
 
-def check(self, firstName='', lastName=''):
+def checkForPatron(firstName='', lastName=''):
 	"""Checks file for existing patron."""
 	patronFile = open('patronFile.txt', 'r')
 	for line in patronFile:
