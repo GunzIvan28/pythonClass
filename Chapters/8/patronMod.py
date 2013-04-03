@@ -21,8 +21,3 @@ class patron(object):
 		patronObject = [self._firstName,self._lastName,self._numberOfBooks]
 		patronInfo = '|'.join(patronObject)
 		return patronInfo
-	
-	def infoForFile(self):
-		"""For passing to fileInteraction."""
-		patronObject = [self._firstName,self._lastName,self._numberOfBooks]
-		return patronObject

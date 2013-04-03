@@ -15,7 +15,7 @@ def removePatron(patronInfo):
 	for line in lines:
 		line = line.split(',')
 		if line[0] != patronInfo[0] or line[1] != patronInfo[1]:
-			line = ','.join(line) + '\n'
+			line = ','.join(line)
 			patronFile.write(line)
 
 def checkForPatron(firstName='', lastName=''):
