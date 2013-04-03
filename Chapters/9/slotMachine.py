@@ -4,8 +4,7 @@ import random
 
 class slotGUI(Frame):
 
-
-	def __init__(self):
+	def __init__(self, money):
 		Frame.__init__(self)
 		self.master.title('Slots!')
 		self.grid()
@@ -20,8 +19,6 @@ class slotGUI(Frame):
 		self._randImage = self._imageDictionary[random.randrange(0,5)]
 		return self._randImage
 
-	# def _updateMoney(self):
-
 	def _switch(self):
 		self._imageList = []
 		self._labelList = []
@@ -29,14 +26,11 @@ class slotGUI(Frame):
 			self._imageList.append(PhotoImage(file = self._getRandPic()))
 			self._labelList.append(Label(self, image = self._imageList[i]))
 			self._labelList[i].grid(row = 1, column = i)
-		self._currentMoney = Label(self, text = money)
-		self._currentMoney.grid(row = 2, column = 0)
-
 
 def main():
 	money = 100
 	beginMessage = 'You begin with $100.\nEach bet is $10.'
 	showinfo(title = 'Welcome!', message = beginMessage)
-	slotGUI().mainloop()
+	slotGUI(money).mainloop()
 
 main()

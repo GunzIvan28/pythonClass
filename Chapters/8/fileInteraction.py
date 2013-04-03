@@ -1,7 +1,9 @@
 def newPatron(firstName, lastName, books):
 	"""Adds new patron to patronFile.txt"""  
+	books = [book.replace('/',' ') for book in books]
+	bookString = '/'.join(books)
 	patronFile = open('patronFile.txt', 'a')
-	patronFile.write(('|'.join([firstName,lastName,books]) + '\n'))
+	patronFile.write(('|'.join([firstName,lastName,bookString]) + '\n'))
 	patronFile.close()
 
 def checkForPatron(firstName='', lastName=''):

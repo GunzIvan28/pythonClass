@@ -12,7 +12,7 @@ Notes:
 import os 
 
 def clearScreen(): 
-    os.system(['clear','cls'][os.name == 'nt']) 
+    os.system(['clear','cls'][os.name == 'nt'])
 
 # Game board.
 table = [['|_|', '|_|', '|_|', '|_|', '|_|', '|_|', '|_|'], 

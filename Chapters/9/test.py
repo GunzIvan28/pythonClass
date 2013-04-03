@@ -1,5 +1,5 @@
 from Tkinter import *
 
 Tk()
-myVar = IntVar()
+myVar = InKtVar()
 print stringVar.get()
