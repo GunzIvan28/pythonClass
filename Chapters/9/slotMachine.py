@@ -8,6 +8,7 @@ class slotGUI(Frame):
 		Frame.__init__(self)
 		self.master.title('Slots!')
 		self.grid()
+		self._money = 100
 		self._initText = Label(self, text = 'Welcome!', height = 5, width = 20, font = 16)
 		self._initText.grid(row = 1, column = 1)
 		self._button = Button(self,	text = "Play!", command = self._switch)
@@ -26,6 +27,9 @@ class slotGUI(Frame):
 			self._imageList.append(PhotoImage(file = self._getRandPic()))
 			self._labelList.append(Label(self, image = self._imageList[i]))
 			self._labelList[i].grid(row = 1, column = i)
+		self._money -= 10
+		self._moneyDisplay = Label(self, text = self._money)
+		self._moneyDisplay.grid(row = 2, column = 0)
 
 def main():
 	money = 100
