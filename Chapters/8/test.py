@@ -1,10 +1,11 @@
 from fileInteraction import *
 from patronMod import patron
+from bookMod import book
 
 # newPatron('bill', 'minear', '3')
-
-# try:
-newPatron = patron(checkForPatron('bill','minear'))
-print newPatron
-# except TypeError:
-# 	print 'Patron not found.'
+bookInfo = checkForBook('aBook','me')
+if bookInfo != False:
+	theBook = book(bookInfo)
+	print theBook
+else:
+	print 'No Book'

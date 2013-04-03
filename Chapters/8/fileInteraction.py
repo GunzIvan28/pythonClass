@@ -1,3 +1,6 @@
+
+""" Begin Patron Interaction """
+
 def newPatron(firstName, lastName, numberOfBooks):
 	"""Need to strip spaces."""
 	"""Adds new patron to patronFile.txt"""  
@@ -28,3 +31,20 @@ def checkForPatron(firstName='', lastName=''):
 			return line
 	patronFile.close()
 	return False
+
+""" End Patron Interaction """
+
+""" Begin Book Interaction """
+
+def checkForBook(title, author):
+	bookFile = open('bookFile.txt', 'r')
+	for line in bookFile:
+		line = line.rstrip('\n').split('|')
+		if line[0] == title.lower() and line[1] == author.lower():
+			bookFile.close()
+			return line
+	bookFile.close()
+	return False
+
+
+""" End Book Interaction """
