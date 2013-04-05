@@ -1,6 +1,3 @@
-from patronMod import patron
-from bookMod import book
-from fileInteraction import *
 from menuMod import *
 
 def main():
@@ -8,5 +5,7 @@ def main():
 		menuSelection = secondaryMenus(mainMenu())
 		if menuSelection[1] == 'patron':
 			patronMenu(menuSelection)
+		elif menuSelection[1] == 'book':
+			bookMenu(menuSelection)
 
 main()

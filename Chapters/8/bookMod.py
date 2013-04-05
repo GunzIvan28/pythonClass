@@ -39,8 +39,22 @@ class book(object):
 
 	# def displayBookInfo(self):
 
-	def printWaitList(self):
+	def _prettifyName(self, name):
+		self._nameSplit = name.split(',')
+		self._nameSplit.reverse()
+		self._prettyName = ' '.join(self._nameSplit)
+		return self._prettyName.title()
+
+	def _prettifyWaitList(self, waitList):
+		self._waitListSplit = waitList.split(':')
+		self._tempList = []
+		for patron in self._waitListSplit:
+			self._tempList.append(self._prettifyName(patron))
+		self._prettyWaitList = ', '.join(self._tempList)
+		return self._prettyWaitList
+
+	def bookInfo(self):
 		return 'Title: ' + self._title + '\n' + \
 		'Author: ' + self._author + '\n' + \
-		'Loanee: ' + self._loanee + '\n' + \
-		'Wait List: ' + self._waitList
+		'Loanee: ' + self._prettifyName(self._loanee) + '\n' + \
+		'Wait List: ' + self._prettifyWaitList(self._waitList)

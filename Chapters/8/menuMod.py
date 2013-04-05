@@ -1,5 +1,6 @@
 import os
 from fileInteraction import *
+from bookMod import book
 
 def clearScreen(): 
     os.system(['clear','cls'][os.name == 'nt'])
@@ -99,6 +100,21 @@ def patronMenu(secMenuSelection):
 		else:
 			raw_input('Patron not found. Press ENTER to continue.')
 
+def bookMenu(secMenuSelection):
+	if secMenuSelection[0] == 1:
+		title = raw_input('Enter book title: ')
+		author = raw_input("Enter book's author: ")
+		bookExists = checkForBook(title.lower(), author.lower())
+		if bookExists != False:
+			currentBook = book(bookExists)
+			clearScreen()
+			print currentBook.bookInfo()
+			raw_input('\nPress ENTER to continue.')
+		else:
+			raw_input('Book not found. Press ENTER to continue.')
+
+
+	
 
 
 
