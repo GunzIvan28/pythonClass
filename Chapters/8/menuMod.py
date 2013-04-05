@@ -1,6 +1,7 @@
 import os
 from fileInteraction import *
 from bookMod import book
+from patronMod import patron
 
 def clearScreen(): 
     os.system(['clear','cls'][os.name == 'nt'])
@@ -81,7 +82,7 @@ def patronMenu(secMenuSelection):
 			print 'Name:', patronInfo[0].capitalize(), patronInfo[1].capitalize()
 			print 'Number of books:', patronInfo[2]
 			raw_input('\nPress ENTER to continue.')
-	if secMenuSelection[0] == 2:
+	elif secMenuSelection[0] == 2:
 		firstName = raw_input("\nEnter Patron's first name: ")
 		lastName = raw_input("Enter Patron's last name: ")
 		patronInfo = checkForPatron(firstName.lower(),lastName.lower())
@@ -90,7 +91,7 @@ def patronMenu(secMenuSelection):
 			raw_input('Patron successfully added. Press ENTER to continue.')
 		else:
 			raw_input('Patron already exists. Press ENTER to continue.')
-	if secMenuSelection[0] == 3:
+	elif secMenuSelection[0] == 3:
 		firstName = raw_input("Enter Patron's first name: " )
 		lastName = raw_input("Enter Patron's last name: ")
 		patronInfo = checkForPatron(firstName.lower(),lastName.lower())
@@ -112,8 +113,21 @@ def bookMenu(secMenuSelection):
 			raw_input('\nPress ENTER to continue.')
 		else:
 			raw_input('Book not found. Press ENTER to continue.')
-
-
+	elif secMenuSelection[0] == 2:
+		title = raw_input('Enter book title: ')
+		author = raw_input("Enter book's author: ")
+		bookExists = checkForBook(title.lower(), author.lower())
+		if bookExists != False:
+			currentBook = book(bookExists)
+		else:
+			raw_input('Book not found. Press ENTER to continue.')
+		firstName = raw_input("Enter patron's first name: ")
+		lastName = raw_input("Enter patron's last name: ")
+		patronExists = checkForPatron(firstName.lower(), lastName.lower())
+		if patronExists != False:
+			currentPatron = patron(patronExists)
+		else:
+			raw_input('Patron not found. Press ENTER to continue.')
 	
 
 
