@@ -100,6 +100,8 @@ def patronMenu(secMenuSelection):
 			raw_input('Patron successfully removed. Press ENTER to continue.')
 		else:
 			raw_input('Patron not found. Press ENTER to continue.')
+	elif secMenuSelection[0] == 4:
+		pass
 
 def bookMenu(secMenuSelection):
 	if secMenuSelection[0] == 1:
@@ -113,27 +115,59 @@ def bookMenu(secMenuSelection):
 			raw_input('\nPress ENTER to continue.')
 		else:
 			raw_input('Book not found. Press ENTER to continue.')
+
 	elif secMenuSelection[0] == 2:
 		title = raw_input('Enter book title: ')
 		author = raw_input("Enter book's author: ")
 		bookExists = checkForBook(title.lower(), author.lower())
 		if bookExists != False:
-			currentBook = book(bookExists)
+			currentBook = book(bookExists) # Book object.
+			firstName = raw_input("Enter patron's first name: ")
+			lastName = raw_input("Enter patron's last name: ")
+			newLoaneeExists = checkForPatron(firstName.lower(), lastName.lower())
+			if newLoaneeExists != False:
+				newLoanee = patron()
+				newLoanee.update(newLoaneeExists) # Person that wants the book.
+				if currentBook.available() == True:
+					numberCheck = newLoanee.canCheckout()
+					if numberCheck == True:
+						newLoanee.addNumber()
+						currentBook.updateLoanee(newLoanee.listPatron())
+						updateBook(currentBook.listBookInfo())
+						updatePatron(newLoanee.listPatron())
+					elif numberCheck == False:
+						raw_input('\nPatron has three books already. Press ENTER to continue.')
+				else:
+					currentBook.appendWaitList(newLoanee.listPatron())
+					updateBook(currentBook.listBookInfo())
+					print 'Book already checked out. Patron added to wait list.'
+					raw_input('\nPress ENTER to continue.')
+			else:
+				raw_input('Patron not found. Press ENTER to continue.')
 		else:
 			raw_input('Book not found. Press ENTER to continue.')
-		firstName = raw_input("Enter patron's first name: ")
-		lastName = raw_input("Enter patron's last name: ")
-		patronExists = checkForPatron(firstName.lower(), lastName.lower())
-		if patronExists != False:
-			currentPatron = patron(patronExists)
+
+	elif secMenuSelection[0] == 3:
+		title = raw_input('Enter book title: ')
+		author = raw_input("Enter book's author: ")
+		bookExists = checkForBook(title.lower(), author.lower())
+		if bookExists == False:
+			bookInfo = [title.lower(), author.lower()]
+			newBook = book(bookInfo)
+			addBook(newBook.listBookInfo())
 		else:
-			raw_input('Patron not found. Press ENTER to continue.')
-	
+			raw_input('Book already exists. Press ENTER to continue.')
 
+	elif secMenuSelection[0] == 4:
+		title = raw_input('Enter book title: ')
+		author = raw_input("Enter book's author: ")
+		bookExists = checkForBook(title.lower(), author.lower())
+		if bookExists == False:
+			raw_input('Book not found. Press ENTER to continue.')
+		else:
+			oldBook = book(bookExists)
+			removeBook(oldBook.listBookInfo())
 
-
-
-
-
-
+	elif secMenuSelection[0] == 5:
+		pass
 

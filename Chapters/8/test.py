@@ -6,6 +6,4 @@ from bookMod import book
 bookInfo = checkForBook('aBook','me')
 if bookInfo != False:
 	theBook = book(bookInfo)
-	print theBook.bookInfo()
-else:
-	print 'No Book'
+	updateBook(theBook.returnForWriting())

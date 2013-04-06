@@ -1,1 +1,2 @@
-abook|me|minear,bill|sams,sams:sams,james
+newbook|me||
+test|me|minear,bill|minear,bill:sam,jimmy
