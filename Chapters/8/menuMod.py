@@ -1,3 +1,10 @@
+"""
+Program: Book Manager
+Module: Menu
+Author: Bill Minear
+"""
+
+
 import os
 from fileInteraction import *
 from bookMod import book
@@ -54,10 +61,11 @@ def secondaryMenus(mainMenuSelection):
 			clearScreen()
 			print 'Book tasks:'
 			print '1) View book status'
-			print '2) Book return'
-			print '3) Add book'
-			print '4) Remove book'
-			print '5) Return to Main Menu'
+			print '2) Checkout book' 
+			print '3) Return book'
+			print '4) Add book'
+			print '5) Remove book'
+			print '6) Return to Main Menu'
 			secMenuSelection = raw_input('--> ')
 			menuSelection = inputCheck(secMenuSelection,1,5)
 			if menuSelection == False:
@@ -111,7 +119,7 @@ def bookMenu(secMenuSelection):
 		if bookExists != False:
 			currentBook = book(bookExists)
 			clearScreen()
-			print currentBook.bookInfo()
+			print currentBook.outputBookInfo()
 			raw_input('\nPress ENTER to continue.')
 		else:
 			raw_input('Book not found. Press ENTER to continue.')
@@ -151,6 +159,29 @@ def bookMenu(secMenuSelection):
 		title = raw_input('Enter book title: ')
 		author = raw_input("Enter book's author: ")
 		bookExists = checkForBook(title.lower(), author.lower())
+		if bookExists != False:
+			returnedBook = book(bookExists)
+			loanee = returnedBook.getLoanee()
+			curPatron = patron()
+			curPatron.update(checkForPatron(loanee[0],loanee[1]))
+			curPatron.subtractNumber()
+			updatePatron(curPatron.listPatron())
+			returnedBook.popList()
+			newLoanee = returnedBook.getLoanee()
+			if newLoanee != '':
+				curPatron = patron()
+				curPatron.update(checkForPatron(newLoanee[0],newLoanee[1]))
+				curPatron.addNumber()
+				updatePatron(curPatron.listPatron())
+			updateBook(returnedBook.listBookInfo())
+		else:
+			raw_input('Book not found. Press ENTER to continue.')
+
+
+	elif secMenuSelection[0] == 4:
+		title = raw_input('Enter book title: ')
+		author = raw_input("Enter book's author: ")
+		bookExists = checkForBook(title.lower(), author.lower())
 		if bookExists == False:
 			bookInfo = [title.lower(), author.lower()]
 			newBook = book(bookInfo)
@@ -158,7 +189,7 @@ def bookMenu(secMenuSelection):
 		else:
 			raw_input('Book already exists. Press ENTER to continue.')
 
-	elif secMenuSelection[0] == 4:
+	elif secMenuSelection[0] == 5:
 		title = raw_input('Enter book title: ')
 		author = raw_input("Enter book's author: ")
 		bookExists = checkForBook(title.lower(), author.lower())
@@ -168,6 +199,6 @@ def bookMenu(secMenuSelection):
 			oldBook = book(bookExists)
 			removeBook(oldBook.listBookInfo())
 
-	elif secMenuSelection[0] == 5:
+	elif secMenuSelection[0] == 6:
 		pass
 

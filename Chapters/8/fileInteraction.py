@@ -1,16 +1,19 @@
+"""
+Program: Book Manager
+Module: File Interaction
+Author: Bill Minear
+"""
 
-""" Begin Patron Interaction """
+""" Begin Patron File Interaction """
 
 def newPatron(firstName, lastName, numberOfBooks):
-	"""Need to strip spaces."""
-	"""Adds new patron to patronFile.txt"""  
-	# books = [book.replace('/',' ') for book in books]
-	# bookString = '/'.join(books)
+	"""Adds new patron to patronFile.txt."""
 	patronFile = open('patronFile.txt', 'a')
 	patronFile.write((','.join([firstName,lastName,numberOfBooks]) + '\n'))
 	patronFile.close()
 
 def removePatron(patronInfo):
+	"""Removes patron from patronFile.txt."""
 	patronFile = open('patronFile.txt', 'r')
 	lines = patronFile.readlines()
 	patronFile.close()
@@ -34,6 +37,7 @@ def checkForPatron(firstName='', lastName=''):
 	return False
 
 def updatePatron(patronInfo):
+	"""Updates patron info when it changes."""
 	patronFile = open('patronFile.txt','r')
 	lines = patronFile.readlines()
 	patronFile.close()
@@ -46,13 +50,14 @@ def updatePatron(patronInfo):
 	patronFile.write(','.join(patronInfo) + '\n')
 	patronFile.close()
 
-""" End Patron Interaction """
+""" End Patron File Interaction """
 
 
 
-""" Begin Book Interaction """
+""" Begin Book File Interaction """
 
 def checkForBook(title, author):
+	"""Checks bookFile.txt for book existence."""
 	bookFile = open('bookFile.txt', 'r')
 	for line in bookFile:
 		line = line.rstrip('\n').split('|')
@@ -63,11 +68,13 @@ def checkForBook(title, author):
 	return False
 
 def addBook(bookObject):
+	"""Adds book to bookFile.txt."""
 	bookFile = open('bookFile.txt', 'a')
 	bookFile.write('|'.join(bookObject) + '\n')
 	bookFile.close()
 
 def removeBook(bookObject):
+	"""Removes file from bookFile.txt."""
 	bookFile = open('bookFile.txt', 'r')
 	lines = bookFile.readlines()
 	bookFile.close()
@@ -80,6 +87,7 @@ def removeBook(bookObject):
 	bookFile.close()
 
 def updateBook(bookObject):
+	"""Updates book info in bookFile.txt when it changes."""
 	bookFile = open('bookFile.txt', 'r')
 	lines = bookFile.readlines()
 	bookFile.close()
@@ -92,6 +100,4 @@ def updateBook(bookObject):
 	bookFile.write('|'.join(bookObject) + '\n')
 	bookFile.close()
 
-
-
-""" End Book Interaction """
+""" End Book File Interaction """
