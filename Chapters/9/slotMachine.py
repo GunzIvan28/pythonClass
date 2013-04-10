@@ -36,7 +36,6 @@ class slotGUI(Frame):
 		self._money = 100
 		self._imageDictionary = {0:'bar.gif', 1:'cherry.gif', 2:'doubleBar.gif',
 									3:'seven.gif', 4:'tripleBar.gif'}
-		self._imageList = []
 		self._initText = Label(self, text = 'Welcome!', height = 5, width = 20, font = 16)
 		self._initText.grid(row = 1, column = 1)
 		self._button = Button(self,	text = "Play!", command = self._leverPull)
@@ -48,8 +47,9 @@ class slotGUI(Frame):
 
 	def _payout(self):
 		self._payoutCheck = 0
-		for key, value in self._imageDictionary.iteritems():
-			for image in self._imageList:
+		for image in self._imageList:
+			for key, value in self._imageDictionary.iteritems():
+				print image
 				if image == value:
 					self._payoutCheck += key % 2
 		if self._payoutCheck == 0:
@@ -58,6 +58,7 @@ class slotGUI(Frame):
 			self._money -= 5
 
 	def _leverPull(self):
+		self._imageList = []
 		self._labelList = []
 		for i in xrange(0,3):
 			self._imageList.append(PhotoImage(file = self._getRandPic()))
