@@ -1,5 +1,5 @@
 """
-Program: Book Checkout Manager
+Program: Book Manager
 Module: Patron
 Author: Bill Minear
 """

@@ -1,5 +1,5 @@
 """
-Program: Book Checkout Manager
+Program: Book Manager
 Module: Book
 Author: Bill Minear
 """

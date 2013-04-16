@@ -3,8 +3,6 @@ Program: Book Manager
 Module: Menu
 Author: Bill Minear
 """
-
-
 import os
 from fileInteraction import *
 from bookMod import book

@@ -1,5 +1,4 @@
-from Tkinter import *
-
-Tk()
-myVar = InKtVar()
-print stringVar.get()
+number = 1
+test = ''
+test = test + str(number)
+print test
