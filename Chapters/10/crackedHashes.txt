@@ -1,4 +1,6 @@
-2,your
-2,your
-1,drink
-2,your
+Begin: Tue Apr 23 13:02:28 2013
+
+Password found: Tue Apr 23 13:02:39 2013
+Hash2 = your
+Password found: Tue Apr 23 13:03:06 2013
+Hash1 = drink

@@ -27,21 +27,24 @@ import md5
 import time
 
 counter = 0
-localtime = str(time.asctime(time.localtime(time.time())))
 hash1 = '0b18a3d7b9c43ff1750d2baa4606b8d0'
 hash2 = '62cc0b4ebb0b57b40778179234246c38'
 hash3 = '17c0f75d610ec414e5c9be1a6059b65a'
+
+def getTime():
+	localtime = str(time.asctime(time.localtime(time.time())))
+	return localtime
 
 letters = []
 for num in xrange(97, 123):
 	letters.append(chr(num))
 
-def outputToFile(theHash, password, localtime, counter):
+def outputToFile(theHash, password, counter):
 	"""Outputs cracked hash info to a file stored in the same directory as the program."""
 	hashFile = open('crackedHashes.txt', 'a')
 	hashFile.write('\n\nHash: ' + str(theHash))
 	hashFile.write('\nPassword: ' + str(password))
-	hashFile.write('\nTime of crack: ' + localtime)
+	hashFile.write('\nTime of crack: ' + getTime())
 	hashFile.close()
 	counter += 1
 
@@ -51,11 +54,11 @@ def hashCheck(password, counter):
 	if counter > 3:
 		exit()
 	if (m.hexdigest() == hash1):
-		outputToFile(hash1, password, localtime, counter)
+		outputToFile(hash1, password, counter)
 	elif (m.hexdigest() == hash2):
-		outputToFile(hash2, password, localtime, counter)
+		outputToFile(hash2, password, counter)
 	elif (m.hexdigest() == hash3):
-		outputToFile(hash3, password, localtime, counter)
+		outputToFile(hash3, password, counter)
 
 def hashCreation(width, position, testPass, counter):
 	"""Creates hashes and passes them to hashCheck."""
@@ -65,13 +68,13 @@ def hashCreation(width, position, testPass, counter):
 			hashCreation(width, position + 1, testPass + char, counter)
 		hashCheck(testPass + char, counter)
 
-def main(myNum):
+def main():
 	"""Flow control."""
 	hashFile = open('crackedHashes.txt', 'w')
-	hashFile.write('Starting at: ' + localtime)
+	hashFile.write('Starting at: ' + getTime())
 	hashFile.close()
-	maxChars = myNum 
+	maxChars = 8 
 	for value in range(0, maxChars + 2):
 		hashCreation(value, 0, "", counter)
 
-main(0)
+main()

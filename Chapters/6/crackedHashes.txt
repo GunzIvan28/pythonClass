@@ -1,1 +1,9 @@
-Starting at: Wed Apr 17 09:58:13 2013
+Starting at: Tue Apr 23 13:01:35 2013
+
+Hash: 62cc0b4ebb0b57b40778179234246c38
+Password: your
+Time of crack: Tue Apr 23 13:01:39 2013
+
+Hash: 0b18a3d7b9c43ff1750d2baa4606b8d0
+Password: drink
+Time of crack: Tue Apr 23 13:01:57 2013
