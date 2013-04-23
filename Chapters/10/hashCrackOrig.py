@@ -59,7 +59,7 @@ def hashCheck(password, counter):
 
 def hashCreation(width, position, testPass, counter):
 	"""Creates hashes and passes them to hashCheck."""
-	print 'Checking password:', testPass
+	# print 'Checking password:', testPass
 	for char in letters:
 		if (position < width - 1):
 			hashCreation(width, position + 1, testPass + char, counter)
@@ -73,5 +73,3 @@ def main(myNum):
 	maxChars = myNum 
 	for value in range(0, maxChars + 2):
 		hashCreation(value, 0, "", counter)
-
-main(0)
