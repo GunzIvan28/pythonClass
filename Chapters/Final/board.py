@@ -1,6 +1,12 @@
+"""
+Program: Battleship
+Module: board
+Author: Bill Minear
+"""
 from string import uppercase
 
 class gameboard(object):
+	"""Gameboard and board interactions."""
 
 	def __init__(self):
 		self._ships = {'carrier':'5','battleship':'4','cruiser':'3','submarine':'3','destroyer':'2'}
@@ -19,6 +25,7 @@ class gameboard(object):
 			self._rowKey.update({str(uppercase[row]):int(row)})
 
 	def display(self):
+		"""For showing the board."""
 		print '%4s%3s%3s%3s%3s%3s%3s%3s%3s%4s' % \
 			('1', '2', '3', '4', '5', '6', '7','8','9','10')
 		for rowNumber in xrange(10):
@@ -26,6 +33,7 @@ class gameboard(object):
 			print row
 
 	def placeShip(self, length, placeInfo):
+		"""Places ships into lists for displaying."""
 		self._board[self._rowKey[placeInfo[0].upper()]][int(placeInfo[1]) - 1] = '|S|'
 		if placeInfo[2] == 'right':
 			for i in xrange(int(length)):
@@ -50,7 +58,7 @@ class gameboard(object):
 			return False
 
 	def placeMarker(self, markerInfo):
+		"""For placing moves on the board."""
 		"""markerInfo == [coords, X/O]"""
 		self._board[self._rowKey[markerInfo[0].upper()]][int(markerInfo[1]) - 1] = '|' + markerInfo[2] + '|'
-
 
