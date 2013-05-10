@@ -5,8 +5,16 @@ class player(object):
 
 	def storeShips(self, shipPlaceInfo):
 		self._shipsAndCoords = shipPlaceInfo
-		print self._shipsAndCoords
 
-	def checkHit(self, coords):
+	def checkHit(self, inputCoords):
 		for ship in self._shipsAndCoords:
-			print self._shipsAndCoords[ship]
+			for coord in self._shipsAndCoords[ship]:
+				if coord == inputCoords:
+					self._shipsAndCoords[ship][self._shipsAndCoords[ship].index(coord)] = 'X'
+					inputCoords = inputCoords.split('')
+					hitOutcome = [inputCoords[0], inputCoords[1], 'X']
+					return hitOutcome
+				else:
+					inputCoords = inputCoords.split('')
+					hitOutcome = [inputCoords[0], inputCoords[1], 'O']
+					return hitOutcome

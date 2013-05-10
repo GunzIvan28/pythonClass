@@ -1,3 +1,14 @@
 ai
 same move checking
 win checking
+
+reg game:
+display board with your attack
+display board with your ships, hits, and misses
+
+input for attack
+- check if already done
+- if not, check opponent for ship
+	- if yes, replace coord with X and place X on board
+	- if no, place O on board
+

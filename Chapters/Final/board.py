@@ -25,7 +25,7 @@ class gameboard(object):
 			row = uppercase[rowNumber] + ' ' + ''.join(self._board[rowNumber])
 			print row
 
-	def place(self, length, placeInfo):
+	def placeShip(self, length, placeInfo):
 		self._board[self._rowKey[placeInfo[0].upper()]][int(placeInfo[1]) - 1] = '|S|'
 		if placeInfo[2] == 'right':
 			for i in xrange(int(length)):
@@ -49,6 +49,8 @@ class gameboard(object):
 			self._board[self._rowKey[placeInfo[0].upper()]][int(placeInfo[1]) - 1] = '|_|'
 			return False
 
-
+	def placeMarker(self, markerInfo):
+		"""markerInfo == [coords, X/O]"""
+		self._board[self._rowKey[markerInfo[0].upper()]][int(markerInfo[1]) - 1] = '|' + markerInfo[2] + '|'
 
 
