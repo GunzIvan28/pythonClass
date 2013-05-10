@@ -26,7 +26,6 @@ class gameboard(object):
 			print row
 
 	def place(self, length, placeInfo):
-		placeInfo = placeInfo.split(' ')
 		self._board[self._rowKey[placeInfo[0].upper()]][int(placeInfo[1]) - 1] = '|S|'
 		if placeInfo[2] == 'right':
 			for i in xrange(int(length)):
@@ -37,7 +36,7 @@ class gameboard(object):
 					except IndexError:
 						self._board[self._rowKey[placeInfo[0].upper()]][int(placeInfo[1]) - 1] = '|_|'
 						return False
-		if placeInfo[2] == 'down':
+		elif placeInfo[2] == 'down':
 			for i in xrange(int(length)):
 				while True:
 					try:

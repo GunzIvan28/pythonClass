@@ -1,1 +1,1 @@
-int('a')
+print ord('A')

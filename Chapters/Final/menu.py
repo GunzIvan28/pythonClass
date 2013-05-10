@@ -1,7 +1,9 @@
 from os import system, name
 from time import sleep
+from string import uppercase
 
 #TESTING:
+from players import player
 from board import gameboard
 
 class menu(object):
@@ -31,43 +33,67 @@ class menu(object):
 	def placeShips(self, preGameBoard):
 		self._clearScreen()
 		self._board = preGameBoard
+		self._shipsAndCoords = {}
 		for ship in self._ships:
 			while True:
+				self._clearScreen()
+				self._shipCoords = []
 				self._board.display()
 				print 'Example placement: A 1 right'
 				print 'Place your', ship.title(), '(' + self._ships[ship], 'spaces long' + ')', 'now.'
 				self.placementInput = raw_input('--> ')
-				if self._board.place(self._ships[ship], self.placementInput) == False:
-					raw_input('Invalid placement. Press ENTER to try again.')
+				checkValue = self._placementCheck(self.placementInput)
+				if checkValue == False:
+					raw_input('Invalid input. Press ENTER to try again.')
 				else:
-					break
-				# checkValue = self._placementCheck(self.placementInput)
-				# if checkValue == False:
+					self.placementInput = self.placementInput.split(' ')
+					if self._board.place(self._ships[ship], self.placementInput) == False:
+						raw_input('Invalid placement. Press ENTER to try again.')
+					else:
+						if self.placementInput[2] == 'right':
+							self._shipCoords.append((self.placementInput[0].upper() + self.placementInput[1]))
+							for i in xrange(1,int(self._ships[ship])):
+								self._shipCoords.append((self.placementInput[0].upper() + str((int(self.placementInput[1]) + i))))
+							break
+						elif self.placementInput[2] == 'down':
+							self._shipCoords.append((self.placementInput[0].upper() + self.placementInput[1]))
+							for i in xrange(1,int(self._ships[ship])):
+								self._shipCoords.append(chr((ord(self.placementInput[0].upper()) + i)) + (self.placementInput[1]))
+							break
+			self._shipsAndCoords.update({ship:self._shipCoords})
+		return self._shipsAndCoords
 
-	def placementCheck(self, input):
+	def _placementCheck(self, input):
 		input = input.split(' ')
+		if len(input) < 3:
+			return False
+		letterList = []
 		for i in xrange(10):
 			letterList.append(uppercase[i])
 		if input[0].upper() in letterList:
-			return True
+			pass
 		else:
 			return False
 		try:
-			if int(input[1]) > -1 and input[1] < 11:
-				return True
+			if int(input[1]) > 0 and int(input[1]) < 11:
+				pass
 			else:
 				return False
 		except ValueError:
 			return False
 		if input[2].lower() == 'down' or input[2].lower() == 'right':
-			return True
+			pass
 		else:
 			return False
 
+	# def playInst(self):
 
 
 
+
+player = player()
 menu = menu()
 menu.intro()
 menu.placementInst()
-menu.placeShips(gameboard())
+player.storeShips(menu.placeShips(gameboard()))
+player.checkHit('A1')
